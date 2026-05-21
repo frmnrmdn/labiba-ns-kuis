@@ -1,11 +1,4 @@
-/* ============================================================
-   Labiba NS – Belajar Bersama!
-   script.js – Data soal, logika kuis, audio, dan animasi
-   ============================================================ */
-
-/* ============================================================
-   DATA SOAL
-   ============================================================ */
+// Data soal Calistung
 const CATEGORIES = [
   {
     id: "warna",
@@ -593,18 +586,195 @@ const CATEGORIES = [
   },
 ];
 
-/* ============================================================
-   STATE APLIKASI
-   ============================================================ */
+// Kategori soal mengaji – 10 soal diacak dari 3 kelompok
+const MENGAJI_CATEGORIES = [
+  {
+    id: "hijaiyah-dasar",
+    label: "Hijaiyah Dasar",
+    icon: "🕌",
+    count: 10,
+    // Semua soal tersedia, 10 akan diacak saat kuis dimulai
+    questions: [
+      // === KELOMPOK 1: Hijaiyah Dasar (3 soal) – mengenal bentuk huruf ===
+      {
+        q: "Mana huruf Alif?",
+        arabic: "ا",
+        type: "Hijaiyah Dasar",
+        subtype: "bentuk",
+        options: [
+          { label: "ا", arabic: true },
+          { label: "ب", arabic: true },
+          { label: "ت", arabic: true },
+          { label: "ث", arabic: true },
+        ],
+        correct: 0,
+        hint: "Huruf Alif bentuknya seperti garis tegak lurus!",
+      },
+      {
+        q: "Pilih huruf Ba!",
+        arabic: "ب",
+        type: "Hijaiyah Dasar",
+        subtype: "bentuk",
+        options: [
+          { label: "ن", arabic: true },
+          { label: "ب", arabic: true },
+          { label: "ت", arabic: true },
+          { label: "ي", arabic: true },
+        ],
+        correct: 1,
+        hint: "Huruf Ba punya titik satu di bawah!",
+      },
+      {
+        q: "Huruf mana yang benar untuk Jim?",
+        arabic: "ج",
+        type: "Hijaiyah Dasar",
+        subtype: "bentuk",
+        options: [
+          { label: "ح", arabic: true },
+          { label: "خ", arabic: true },
+          { label: "ج", arabic: true },
+          { label: "ع", arabic: true },
+        ],
+        correct: 2,
+        hint: "Huruf Jim punya titik satu di dalam!",
+      },
+
+      // === KELOMPOK 2: Mengenal Huruf dari Suara (4 soal) – dengar lalu pilih ===
+      {
+        q: "Huruf apa yang berbunyi 'Ta'?",
+        arabic: "ت",
+        type: "Tebak Suara",
+        subtype: "suara",
+        audioLabel: "Ta",
+        // huruf yang dibunyikan
+        audioHuruf: "ت",
+        audioFile: "audio/ta.mp3",
+        options: [
+          { label: "ب", arabic: true },
+          { label: "ت", arabic: true },
+          { label: "ث", arabic: true },
+          { label: "ن", arabic: true },
+        ],
+        correct: 1,
+        hint: "Bunyinya 'Ta' seperti awal kata Tangan!",
+      },
+      {
+        q: "Huruf apa yang berbunyi 'Sin'?",
+        arabic: "س",
+        type: "Tebak Suara",
+        subtype: "suara",
+        audioLabel: "Sin",
+        audioHuruf: "س",
+        audioFile: "audio/sin.mp3",
+        options: [
+          { label: "ش", arabic: true },
+          { label: "ص", arabic: true },
+          { label: "س", arabic: true },
+          { label: "ز", arabic: true },
+        ],
+        correct: 2,
+        hint: "Sin bunyinya 'Sin' seperti awal kata Singa!",
+      },
+      {
+        q: "Huruf apa yang berbunyi 'Mim'?",
+        arabic: "م",
+        type: "Tebak Suara",
+        subtype: "suara",
+        audioLabel: "Mim",
+        audioHuruf: "م",
+        audioFile: "audio/mim.mp3",
+        options: [
+          { label: "م", arabic: true },
+          { label: "ن", arabic: true },
+          { label: "و", arabic: true },
+          { label: "ل", arabic: true },
+        ],
+        correct: 0,
+        hint: "Mim bunyinya 'Mim' seperti awal kata Mama!",
+      },
+      {
+        q: "Huruf apa yang berbunyi 'Nun'?",
+        arabic: "ن",
+        type: "Tebak Suara",
+        subtype: "suara",
+        audioLabel: "Nun",
+        audioHuruf: "ن",
+        audioFile: "audio/nun.mp3",
+        options: [
+          { label: "ي", arabic: true },
+          { label: "ب", arabic: true },
+          { label: "ت", arabic: true },
+          { label: "ن", arabic: true },
+        ],
+        correct: 3,
+        hint: "Nun punya titik satu di atas, bentuk seperti mangkuk!",
+      },
+
+      // === KELOMPOK 3: Soal Interaktif & Visual (3 soal) ===
+      {
+        // Tebak huruf yang hilang dalam urutan
+        q: "Lengkapi urutan: ا – ؟ – ت",
+        arabic: "ب",
+        type: "Huruf Hilang",
+        subtype: "urutan",
+        options: [
+          { label: "ج", arabic: true },
+          { label: "ب", arabic: true },
+          { label: "ث", arabic: true },
+          { label: "د", arabic: true },
+        ],
+        correct: 1,
+        hint: "Urutan hijaiyah: Alif – Ba – Ta!",
+      },
+      {
+        // Cocokkan: pilih huruf yang sesuai nama
+        q: "Huruf manakah yang bernama 'Lam'?",
+        arabic: "ل",
+        type: "Cocokkan Huruf",
+        subtype: "cocokkan",
+        options: [
+          { label: "ك", arabic: true },
+          { label: "م", arabic: true },
+          { label: "ل", arabic: true },
+          { label: "ن", arabic: true },
+        ],
+        correct: 2,
+        hint: "Lam bentuknya seperti kail pancing terbalik!",
+      },
+      {
+        // Visual – pilih huruf yang punya 3 titik di atas
+        q: "Huruf mana yang punya 3 titik di atas?",
+        arabic: "ث",
+        type: "Soal Visual",
+        subtype: "visual",
+        options: [
+          { label: "ب", arabic: true },
+          { label: "ت", arabic: true },
+          { label: "ث", arabic: true },
+          { label: "ن", arabic: true },
+        ],
+        correct: 2,
+        hint: "Cari huruf yang titiknya paling banyak di atas!",
+      },
+    ],
+  },
+];
+
+// State aplikasi
 let soundOn = true;
 let currentCategory = null;
 let currentQ = 0;
 let score = 0;
 let answered = false;
 
-/* ============================================================
-   AUDIO – Web Audio API (tanpa file eksternal)
-   ============================================================ */
+// State khusus mengaji
+let currentMengajiCategory = null;
+let currentMengajiQ = 0;
+let scoreMengaji = 0;
+let answeredMengaji = false;
+let mengajiQuestions = []; // soal yang sudah diacak
+
+// Web Audio API – tanpa file eksternal
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
 let actx = null;
 
@@ -631,30 +801,64 @@ function playTone(freq, type, dur, vol = 0.3) {
 }
 
 function playCorrectSound() {
-  playTone(523, "sine", 0.15);
-  setTimeout(() => playTone(659, "sine", 0.15), 100);
-  setTimeout(() => playTone(784, "sine", 0.3), 200);
+  playTone(523, "sine", 0.15, 0.15);
+  setTimeout(() => playTone(659, "sine", 0.15, 0.15), 100);
+  setTimeout(() => playTone(784, "sine", 0.3, 0.15), 200);
 }
 
 function playWrongSound() {
-  playTone(330, "sawtooth", 0.2, 0.2);
+  playTone(330, "sawtooth", 0.2, 0.15);
   setTimeout(() => playTone(220, "sawtooth", 0.3, 0.15), 150);
 }
 
 function playClickSound() {
-  playTone(440, "sine", 0.08, 0.15);
+  playTone(440, "sine", 0.08, 0.08);
+}
+
+// Fungsi Text-to-Speech untuk melafalkan huruf hijaiyah
+function speakArabic(huruf, audioFile) {
+  if (!soundOn) return;
+
+  if (audioFile) {
+    const ctx = getACtx();
+    fetch(audioFile)
+      .then((res) => res.arrayBuffer())
+      .then((buf) => ctx.decodeAudioData(buf))
+      .then((decoded) => {
+        const source = ctx.createBufferSource();
+        const gain = ctx.createGain();
+        gain.gain.value = 5.0; //angka ini menentukan volume.
+        source.buffer = decoded;
+        source.connect(gain);
+        gain.connect(ctx.destination);
+        source.start(0);
+      })
+      .catch((e) => console.log("Audio error:", e));
+    return;
+  }
+
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(huruf);
+    utter.lang = "ar-SA";
+    utter.rate = 0.7;
+    utter.volume = 1.0;
+    window.speechSynthesis.speak(utter);
+  }
 }
 
 function toggleSound() {
   soundOn = !soundOn;
   const icon = soundOn ? "🔊" : "🔇";
-  document.getElementById("soundToggle").textContent = icon;
-  document.getElementById("soundToggle2").textContent = icon;
+  ["soundToggle", "soundToggle2", "soundToggle3", "soundToggle4"].forEach(
+    (id) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = icon;
+    },
+  );
 }
 
-/* ============================================================
-   NAVIGASI LAYAR
-   ============================================================ */
+// Tampilkan layar berdasarkan id, sembunyikan sisanya
 function showScreen(id) {
   document
     .querySelectorAll(".screen")
@@ -670,9 +874,16 @@ function goToCategory() {
 
 function goToClassCategory() {
   playClickSound();
-  // sync ikon suara
-  document.getElementById("soundToggle3").textContent = soundOn ? "🔊" : "🔇";
+  const icon = soundOn ? "🔊" : "🔇";
+  const el = document.getElementById("soundToggle3");
+  if (el) el.textContent = icon;
   showScreen("classCategory");
+}
+
+function goToMengaji() {
+  playClickSound();
+  buildMengajiGrid();
+  showScreen("mengajiCategory");
 }
 
 function showComingSoon(name) {
@@ -683,13 +894,10 @@ function showComingSoon(name) {
   document.getElementById("modalOverlay").classList.remove("hidden");
 }
 
-/* ============================================================
-   GRID KATEGORI
-   ============================================================ */
+// Bangun grid kategori Calistung
 function buildCategoryGrid() {
   const grid = document.getElementById("categoryGrid");
   grid.innerHTML = "";
-
   CATEGORIES.forEach((cat) => {
     const card = document.createElement("div");
     card.className = "cat-card";
@@ -703,9 +911,34 @@ function buildCategoryGrid() {
   });
 }
 
-/* ============================================================
-   LOGIKA KUIS
-   ============================================================ */
+// Bangun grid kategori Mengaji
+function buildMengajiGrid() {
+  const grid = document.getElementById("mengajiGrid");
+  grid.innerHTML = "";
+  MENGAJI_CATEGORIES.forEach((cat) => {
+    const card = document.createElement("div");
+    card.className = "cat-card";
+    card.innerHTML = `
+      <span class="cat-icon">${cat.icon}</span>
+      <span class="cat-label">${cat.label}</span>
+      <span class="cat-count">10 soal</span>
+    `;
+    card.onclick = () => startMengajiQuiz(cat);
+    grid.appendChild(card);
+  });
+}
+
+// Acak array (Fisher-Yates)
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Mulai kuis Calistung
 function startQuiz(cat) {
   playClickSound();
   currentCategory = cat;
@@ -723,28 +956,22 @@ function renderQuestion() {
   const q = currentCategory.questions[currentQ];
   const total = currentCategory.questions.length;
 
-  // Update progress bar
   const pct = (currentQ / total) * 100;
   document.getElementById("progressFill").style.width = pct + "%";
   document.getElementById("progressLabel").textContent =
     currentQ + 1 + " / " + total;
 
-  // Render kartu soal
   document.getElementById("questionCard").innerHTML = `
     <div class="question-type-badge">${q.type}</div>
     <div class="question-text">${q.q}</div>
     <span class="question-img">${q.img}</span>
   `;
 
-  // Reset hint
   const hintBox = document.getElementById("hintBox");
   hintBox.classList.remove("show");
   document.getElementById("hintText").textContent = q.hint;
-
-  // Sembunyikan tombol Next
   document.getElementById("nextBtn").style.display = "none";
 
-  // Render tombol jawaban
   const grid = document.getElementById("answersGrid");
   grid.innerHTML = "";
   const hasCols4 = q.options.length === 4 && !q.options[0].icon;
@@ -765,7 +992,6 @@ function handleAnswer(idx, btn, q) {
   if (answered) return;
   answered = true;
   playClickSound();
-
   const allBtns = document.querySelectorAll(".ans-btn");
   allBtns.forEach((b) => (b.disabled = true));
 
@@ -781,8 +1007,6 @@ function handleAnswer(idx, btn, q) {
     allBtns[q.correct].classList.add("correct");
     showFeedback(false);
     playWrongSound();
-
-    // Tampilkan modal petunjuk lembut
     setTimeout(() => {
       document.getElementById("modalTitle").textContent = "Hampir Benar! 😊";
       document.getElementById("modalBody").innerHTML =
@@ -797,7 +1021,7 @@ function handleAnswer(idx, btn, q) {
   }, 1200);
 }
 
-/* Pesan acak feedback */
+// Pesan feedback acak
 const CORRECT_MSGS = [
   "Hebat! 🌟",
   "Benar Sekali! 🎉",
@@ -812,10 +1036,31 @@ const WRONG_MSGS = [
   "Jangan Menyerah! ⭐",
 ];
 
-function showFeedback(correct) {
+// Pesan feedback khusus mengaji
+const CORRECT_MSGS_MENGAJI = [
+  "MasyaAllah! 🌟",
+  "Hebat Mengajinya! 🎉",
+  "Luar Biasa! ✨",
+  "Pintar! 🌙",
+  "Bagus Sekali! 🕌",
+];
+const WRONG_MSGS_MENGAJI = [
+  "Hampir Benar! 😊",
+  "Coba Lagi Ya! 💪",
+  "Semangat! 🌈",
+  "Jangan Menyerah! ⭐",
+];
+
+function showFeedback(correct, isMengaji = false) {
   const el = document.getElementById("feedbackBanner");
   el.className = "feedback-banner " + (correct ? "correct" : "wrong");
-  const msgs = correct ? CORRECT_MSGS : WRONG_MSGS;
+  const msgs = correct
+    ? isMengaji
+      ? CORRECT_MSGS_MENGAJI
+      : CORRECT_MSGS
+    : isMengaji
+      ? WRONG_MSGS_MENGAJI
+      : WRONG_MSGS;
   el.textContent = msgs[Math.floor(Math.random() * msgs.length)];
   el.classList.add("show");
 }
@@ -839,35 +1084,29 @@ function nextQuestion() {
   }
 }
 
-/* ============================================================
-   LAYAR HASIL
-   ============================================================ */
+// Halaman hasil Calistung
 function showResult() {
   showScreen("result");
-
   const total = currentCategory.questions.length * 20;
   const pct = score / total;
-  let title, msg, stars, owl;
+  let title, msg, stars;
 
   if (pct >= 1) {
     title = "SEMPURNA! 🏆";
     msg = "Selamat! Kamu mendapatkan nilai sempurna! Pertahankan terus ya!";
     stars = "⭐⭐⭐";
-    owl = "🦉";
     playCorrectSound();
     spawnConfetti(120);
   } else if (pct >= 0.6) {
     title = "BAGUS SEKALI! 🌟";
     msg = "Kamu hebat! Terus belajar dan kamu bisa lebih baik lagi!";
     stars = "⭐⭐";
-    owl = "🦉";
     playCorrectSound();
     spawnConfetti(60);
   } else {
     title = "TERUS SEMANGAT! 💪";
     msg = "Latihan terus ya! Semakin banyak belajar, semakin pintar!";
     stars = "⭐";
-    owl = "😊";
     playTone(440, "sine", 0.5, 0.2);
   }
 
@@ -875,7 +1114,6 @@ function showResult() {
   document.getElementById("resultScore").textContent = score;
   document.getElementById("resultMsg").textContent = msg;
   document.getElementById("resultStars").textContent = stars;
-  document.getElementById("resultOwl").textContent = owl;
 }
 
 function repeatCategory() {
@@ -883,9 +1121,201 @@ function repeatCategory() {
   startQuiz(currentCategory);
 }
 
-/* ============================================================
-   CONFETTI
-   ============================================================ */
+// ============================================================
+// LOGIKA KUIS MENGAJI
+// ============================================================
+
+// Mulai kuis mengaji – acak 10 soal dari pool
+function startMengajiQuiz(cat) {
+  playClickSound();
+  currentMengajiCategory = cat;
+  currentMengajiQ = 0;
+  scoreMengaji = 0;
+
+  // Pisahkan soal per subtype lalu ambil sesuai kuota, sisanya diacak
+  const bentuk = cat.questions.filter((q) => q.subtype === "bentuk");
+  const suara = cat.questions.filter((q) => q.subtype === "suara");
+  const lainnya = cat.questions.filter(
+    (q) => q.subtype !== "bentuk" && q.subtype !== "suara",
+  );
+
+  // Ambil 3 bentuk, 4 suara, 3 lainnya – diacak urutannya
+  const picked = [
+    ...shuffle(bentuk).slice(0, 3),
+    ...shuffle(suara).slice(0, 4),
+    ...shuffle(lainnya).slice(0, 3),
+  ];
+  mengajiQuestions = shuffle(picked);
+
+  document.getElementById("scoreBadgeMengaji").textContent = "⭐ 0";
+  document.getElementById("quizMengajiLabel").textContent =
+    cat.icon + " " + cat.label;
+  showScreen("quizMengaji");
+  renderMengajiQuestion();
+}
+
+function renderMengajiQuestion() {
+  answeredMengaji = false;
+  const q = mengajiQuestions[currentMengajiQ];
+  const total = mengajiQuestions.length;
+
+  const pct = (currentMengajiQ / total) * 100;
+  document.getElementById("progressFillMengaji").style.width = pct + "%";
+  document.getElementById("progressLabelMengaji").textContent =
+    currentMengajiQ + 1 + " / " + total;
+
+  // Render kartu soal sesuai subtype
+  const card = document.getElementById("questionCardMengaji");
+  let audioBtn = "";
+
+  // Soal tipe suara – tampilkan tombol putar TTS
+  if (q.subtype === "suara") {
+    // Tombol putar – kirim audioFile juga
+    audioBtn = `
+  <button class="play-audio-btn" 
+    onclick="speakArabic('${q.audioHuruf}', '${q.audioFile || ""}')">
+    🔊 Dengarkan Hurufnya
+  </button>
+`;
+  }
+
+  card.innerHTML = `
+    <div class="question-type-badge badge-mengaji">${q.type}</div>
+    <div class="question-text">${q.q}</div>
+    <span class="arabic-display">${q.arabic}</span>
+    ${audioBtn}
+  `;
+
+  // Otomatis putar suara untuk soal tipe suara
+  if (q.subtype === "suara" && soundOn) {
+    setTimeout(() => speakArabic(q.audioHuruf), 500);
+  }
+
+  const hintBox = document.getElementById("hintBoxMengaji");
+  hintBox.classList.remove("show");
+  document.getElementById("hintTextMengaji").textContent = q.hint;
+  document.getElementById("nextBtnMengaji").style.display = "none";
+
+  // Render tombol jawaban Arab
+  const grid = document.getElementById("answersGridMengaji");
+  grid.innerHTML = "";
+  grid.className = "answers-grid arabic-grid";
+
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "ans-btn arabic-btn";
+    btn.textContent = opt.label;
+    btn.onclick = () => handleMengajiAnswer(idx, btn, q);
+    grid.appendChild(btn);
+  });
+}
+
+function handleMengajiAnswer(idx, btn, q) {
+  if (answeredMengaji) return;
+  answeredMengaji = true;
+  playClickSound();
+
+  const allBtns = document.querySelectorAll("#answersGridMengaji .ans-btn");
+  allBtns.forEach((b) => (b.disabled = true));
+
+  if (idx === q.correct) {
+    btn.classList.add("correct");
+    scoreMengaji += 10;
+    document.getElementById("scoreBadgeMengaji").textContent =
+      "⭐ " + scoreMengaji;
+    showFeedback(true, true);
+    playCorrectSound();
+    spawnConfettiIslami();
+  } else {
+    btn.classList.add("wrong");
+    allBtns[q.correct].classList.add("correct");
+    showFeedback(false, true);
+    playWrongSound();
+    setTimeout(() => {
+      document.getElementById("modalTitle").textContent = "Hampir Benar! 😊";
+      document.getElementById("modalBody").innerHTML =
+        `Jawaban yang benar adalah <strong style="font-size:1.8rem;direction:rtl;">${q.options[q.correct].label}</strong>
+        <br><br>💡 ${q.hint}`;
+      document.getElementById("modalOverlay").classList.remove("hidden");
+    }, 700);
+  }
+
+  setTimeout(() => {
+    hideFeedback();
+    document.getElementById("nextBtnMengaji").style.display = "";
+  }, 1200);
+}
+
+function showHintMengaji() {
+  playClickSound();
+  document.getElementById("hintBoxMengaji").classList.add("show");
+}
+
+function nextQuestionMengaji() {
+  playClickSound();
+  currentMengajiQ++;
+  if (currentMengajiQ >= mengajiQuestions.length) {
+    showResultMengaji();
+  } else {
+    renderMengajiQuestion();
+  }
+}
+
+// Halaman hasil mengaji
+function showResultMengaji() {
+  showScreen("resultMengaji");
+  const total = mengajiQuestions.length * 10; // max 100
+  const pct = scoreMengaji / total;
+  let title, msg, stars;
+
+  if (pct >= 1) {
+    title = "MasyaAllah! 🏆";
+    msg =
+      "Sempurna! Kamu hafal semua huruf hijaiyahnya! Terus semangat mengaji!";
+    stars = "⭐⭐⭐";
+    playCorrectSound();
+    spawnConfettiIslami(120);
+  } else if (pct >= 0.6) {
+    title = "Bagus Sekali! 🌙";
+    msg =
+      "Hebat mengajinya! Terus belajar dan kamu pasti bisa lebih baik lagi!";
+    stars = "⭐⭐";
+    playCorrectSound();
+    spawnConfettiIslami(60);
+  } else {
+    title = "Terus Semangat! 💪";
+    msg =
+      "Latihan terus ya! Semakin sering belajar, semakin lancar mengajinya!";
+    stars = "⭐";
+    playTone(440, "sine", 0.5, 0.2);
+  }
+
+  document.getElementById("resultTitleMengaji").textContent = title;
+  document.getElementById("resultScoreMengaji").textContent = scoreMengaji;
+  document.getElementById("resultMsgMengaji").textContent = msg;
+  document.getElementById("resultStarsMengaji").textContent = stars;
+}
+
+function repeatMengaji() {
+  playClickSound();
+  startMengajiQuiz(currentMengajiCategory);
+}
+
+// Confetti warna islami (hijau & emas dominan)
+function spawnConfettiIslami(count = 60) {
+  const colors = [
+    "#4CAF50",
+    "#F5C857",
+    "#81C784",
+    "#FFF176",
+    "#A5D6A7",
+    "#FFD54F",
+    "#ffffff",
+  ];
+  spawnConfettiWithColors(colors, count);
+}
+
+// Confetti standar Calistung
 function spawnConfetti(count = 60) {
   const colors = [
     "#F5C857",
@@ -896,7 +1326,10 @@ function spawnConfetti(count = 60) {
     "#9C27B0",
     "#E91E63",
   ];
+  spawnConfettiWithColors(colors, count);
+}
 
+function spawnConfettiWithColors(colors, count) {
   for (let i = 0; i < count; i++) {
     setTimeout(() => {
       const el = document.createElement("div");
@@ -918,17 +1351,16 @@ function spawnConfetti(count = 60) {
   }
 }
 
-/* ============================================================
-   MODAL
-   ============================================================ */
 function closeModal() {
   playClickSound();
   document.getElementById("modalOverlay").classList.add("hidden");
 }
 
-/* ============================================================
-   INIT – jalankan saat halaman siap
-   ============================================================ */
+// Init saat halaman siap
 document.addEventListener("DOMContentLoaded", () => {
   buildCategoryGrid();
+  // Preload daftar suara agar TTS siap dipakai
+  if (window.speechSynthesis) {
+    window.speechSynthesis.getVoices();
+  }
 });

@@ -5,158 +5,141 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Labiba NS - Belajar Bersama!</title>
-
-  <!-- Google Fonts dimuat di style.css via @import -->
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="svg" href="/img/icon-labiba.png">
 </head>
 
 <body>
-  <!-- ================================================
-       LAYAR 1 – SPLASH / HALAMAN PEMBUKA
-       ================================================ -->
+
+  <!-- LAYAR 1 – SPLASH -->
   <div class="screen" id="splash">
-
-    <!-- Logo -->
     <img src="/img/Labiba-Logo.png" class="splash-logo-wrap" alt="Logo-Labiba">
-    <!-- Tagline -->
     <div class="splash-tagline">AYO BELAJAR BERSAMA!</div>
-
-    <!-- Tombol Mulai -->
     <button class="btn btn-yellow" onclick="goToClassCategory()"
       style="margin-top:8px;font-size:1.4rem;padding:16px 52px;">
       Mulai Belajar
     </button>
-
-    <!-- Toggle Suara -->
     <div style="position:absolute;top:16px;right:16px;">
       <button class="sound-btn" id="soundToggle" onclick="toggleSound()" title="Toggle suara">🔊</button>
     </div>
+  </div>
 
-  </div><!-- #splash -->
-
-  <!-- ================================================
-     LAYAR 1.5 – KATEGORI KELAS
-     ================================================ -->
+  <!-- LAYAR 1.5 – KATEGORI KELAS -->
   <div class="screen hidden" id="classCategory">
-
-    <!-- Navbar -->
     <div class="navbar">
       <img src="img/icon-labiba.png" class="icon-navbar" alt="Icon-Labiba">
       <div class="navbar-title">Kategori Kelas</div>
       <button class="sound-btn" onclick="toggleSound()" id="soundToggle3">🔊</button>
     </div>
-
-    <!-- Konten -->
     <div class="class-body">
       <div class="section-title" style="margin-bottom: 8px;">Pilih Kelas Kamu!</div>
-
       <div class="class-grid">
-
-        <!-- Calistung -->
         <div class="class-card" onclick="goToCategory()">
           <div class="class-card-label">Calistung</div>
           <img src="img/calistung.png" alt="Calistung">
         </div>
-
-        <!-- Mengaji -->
-        <div class="class-card" onclick="showComingSoon('Mengaji')">
+        <div class="class-card" onclick="goToMengaji()">
           <div class="class-card-label">Mengaji</div>
           <img src="img/mengaji.png" alt="Mengaji">
         </div>
-
-        <!-- Sekolah Dasar -->
         <div class="class-card" onclick="showComingSoon('Sekolah Dasar')">
           <div class="class-card-label">Sekolah Dasar</div>
           <img src="img/sekolahdasar.png" alt="Sekolah Dasar">
         </div>
-
       </div>
     </div>
+  </div>
 
-  </div><!-- #classCategory -->
-
-  <!-- ================================================
-       LAYAR 2 – PILIH KATEGORI
-       ================================================ -->
+  <!-- LAYAR 2 – PILIH KATEGORI (Calistung) -->
   <div class="screen hidden" id="category">
-
-    <!-- Navbar -->
     <div class="navbar">
       <img src="img/icon-labiba.png" class="icon-navbar" alt="Icon-Labiba">
       <div class="navbar-title">Pilih Kategori</div>
       <button class="sound-btn" onclick="toggleSound()" id="soundToggle2">🔊</button>
     </div>
-
-    <!-- Konten kategori -->
     <div class="category-body">
       <div class="section-title">Mau Belajar Apa Hari Ini?</div>
-
-      <!-- Grid kategori diisi oleh script.js (buildCategoryGrid) -->
       <div class="category-grid" id="categoryGrid"></div>
-      <!-- Tombol kembali ke kelas -->
       <button class="btn btn-back" style="padding:10px 22px;font-size:1rem;align-self:flex-start;margin-top:auto;"
         onclick="goToClassCategory()">← Kembali</button>
     </div>
+  </div>
 
-  </div><!-- #category -->
+  <!-- LAYAR 2.5 – PILIH KATEGORI MENGAJI -->
+  <div class="screen hidden" id="mengajiCategory">
+    <div class="navbar">
+      <img src="img/icon-labiba.png" class="icon-navbar" alt="Icon-Labiba">
+      <div class="navbar-title">Belajar Mengaji</div>
+      <button class="sound-btn" onclick="toggleSound()" id="soundToggle4">🔊</button>
+    </div>
+    <div class="category-body">
+      <div class="section-title">Pilih Materi Mengaji!</div>
+      <div class="category-grid-center" id="mengajiGrid"></div>
+      <button class="btn btn-back" style="padding:10px 22px;font-size:1rem;align-self:flex-start;margin-top:auto;"
+        onclick="goToClassCategory()">← Kembali</button>
+    </div>
+  </div>
 
-
-  <!-- ================================================
-       LAYAR 3 – KUIS
-       ================================================ -->
+  <!-- LAYAR 3 – KUIS (Calistung) -->
   <div class="screen hidden" id="quiz">
-
-    <!-- Navbar -->
     <div class="navbar">
       <button class="btn btn-outline" style="padding:10px 10px;font-size: .9rem;" onclick="goToCategory()">←
         Kembali</button>
       <div class="navbar-brand" id="quizCategoryLabel"></div>
-
       <div class="score-badge" id="scoreBadge">⭐ 0</div>
     </div>
-
-    <!-- Body kuis -->
     <div class="quiz-body">
-
-      <!-- Progress bar -->
       <div class="progress-wrap">
         <div class="progress-bar-bg">
           <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
         </div>
         <div class="progress-label" id="progressLabel">1 / 5</div>
       </div>
-
-      <!-- Kartu soal (diisi oleh script.js) -->
       <div class="question-card" id="questionCard"></div>
-
-      <!-- Kotak petunjuk -->
       <div class="hint-box" id="hintBox">
         💡 <span id="hintText"></span>
       </div>
-
-      <!-- Tombol jawaban (diisi oleh script.js) -->
       <div class="answers-grid" id="answersGrid"></div>
-
-      <!-- Navigasi bawah -->
       <div class="quiz-nav">
         <button class="btn btn-outline" style="padding:10px 22px;font-size:1rem;" onclick="showHint()">💡
           Petunjuk</button>
-
         <button class="btn btn-blue" id="nextBtn" style="padding:10px 28px;font-size:1rem;display:none;"
           onclick="nextQuestion()">Selanjutnya →</button>
       </div>
-
     </div>
+  </div>
 
-  </div><!-- #quiz -->
+  <!-- LAYAR 3.5 – KUIS MENGAJI -->
+  <div class="screen hidden" id="quizMengaji">
+    <div class="navbar">
+      <button class="btn btn-outline" style="padding:10px 10px;font-size:.9rem;" onclick="goToMengaji()">←
+        Kembali</button>
+      <div class="navbar-brand" id="quizMengajiLabel"></div>
+      <div class="score-badge" id="scoreBadgeMengaji">⭐ 0</div>
+    </div>
+    <div class="quiz-body">
+      <div class="progress-wrap">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFillMengaji" style="width:0%"></div>
+        </div>
+        <div class="progress-label" id="progressLabelMengaji">1 / 10</div>
+      </div>
+      <div class="question-card mengaji-card" id="questionCardMengaji"></div>
+      <div class="hint-box" id="hintBoxMengaji">
+        💡 <span id="hintTextMengaji"></span>
+      </div>
+      <div class="answers-grid" id="answersGridMengaji"></div>
+      <div class="quiz-nav">
+        <button class="btn btn-outline" style="padding:10px 22px;font-size:1rem;" onclick="showHintMengaji()">💡
+          Petunjuk</button>
+        <button class="btn btn-green" id="nextBtnMengaji" style="padding:10px 28px;font-size:1rem;display:none;"
+          onclick="nextQuestionMengaji()">Selanjutnya →</button>
+      </div>
+    </div>
+  </div>
 
-
-  <!-- ================================================
-       LAYAR 4 – HASIL AKHIR
-       ================================================ -->
+  <!-- LAYAR 4 – HASIL AKHIR (Calistung) -->
   <div class="screen hidden" id="result">
-
     <div class="result-card">
       <img src="/img/icon-labiba.png" class="result-logo" alt="Logo-Labiba">
       <div class="result-title" id="resultTitle">KUIS SELESAI!</div>
@@ -167,26 +150,34 @@
         Selamat kamu mendapatkan nilai 100! Pertahankan dan terus belajar!
       </div>
       <div class="result-buttons">
-        <button class="btn btn-yellow" onclick="repeatCategory()">
-          Ulangi Kuis
-        </button>
+        <button class="btn btn-yellow" onclick="repeatCategory()">Ulangi Kuis</button>
         <button class="btn btn-blue" onclick="goToCategory()"
           style="background:rgba(255,255,255,.25);border:2px solid #fff;">Pilih Kategori Lain</button>
       </div>
     </div>
+  </div>
 
-  </div><!-- #result -->
+  <!-- LAYAR 4.5 – HASIL AKHIR MENGAJI -->
+  <div class="screen hidden" id="resultMengaji">
+    <div class="result-card result-card-mengaji">
+      <img src="/img/icon-labiba.png" class="result-logo" alt="Logo-Labiba">
+      <div class="result-title" id="resultTitleMengaji">KUIS SELESAI!</div>
+      <div class="stars-row" id="resultStarsMengaji">⭐⭐⭐</div>
+      <div class="result-score-label">NILAIMU</div>
+      <div class="result-score" id="resultScoreMengaji">100</div>
+      <div class="result-msg" id="resultMsgMengaji">MasyaAllah! Hebat mengajinya!</div>
+      <div class="result-buttons">
+        <button class="btn btn-yellow" onclick="repeatMengaji()">Ulangi Kuis</button>
+        <button class="btn btn-green" onclick="goToMengaji()"
+          style="background:rgba(255,255,255,.25);border:2px solid #fff;">Pilih Materi Lain</button>
+      </div>
+    </div>
+  </div>
 
-
-  <!-- ================================================
-       BANNER FEEDBACK (benar / salah)
-       ================================================ -->
+  <!-- BANNER FEEDBACK -->
   <div class="feedback-banner" id="feedbackBanner"></div>
 
-
-  <!-- ================================================
-       MODAL – PETUNJUK JAWABAN SALAH
-       ================================================ -->
+  <!-- MODAL -->
   <div class="modal-overlay hidden" id="modalOverlay">
     <div class="modal">
       <h2 id="modalTitle">Hampir Benar!</h2>
@@ -197,10 +188,6 @@
     </div>
   </div>
 
-
-  <!-- ================================================
-       SCRIPT – dimuat terakhir agar DOM sudah siap
-       ================================================ -->
   <script src="script.js"></script>
 
 </body>
