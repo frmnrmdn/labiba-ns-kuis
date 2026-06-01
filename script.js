@@ -886,14 +886,6 @@ function goToMengaji() {
   showScreen("mengajiCategory");
 }
 
-function showComingSoon(name) {
-  playClickSound();
-  document.getElementById("modalTitle").textContent = "Segera Hadir! 🚀";
-  document.getElementById("modalBody").innerHTML =
-    `Kategori <strong>${name}</strong> sedang dalam pengembangan.<br>Nantikan updatenya ya! 😊`;
-  document.getElementById("modalOverlay").classList.remove("hidden");
-}
-
 // Bangun grid kategori Calistung
 function buildCategoryGrid() {
   const grid = document.getElementById("categoryGrid");
@@ -1364,3 +1356,4168 @@ document.addEventListener("DOMContentLoaded", () => {
     window.speechSynthesis.getVoices();
   }
 });
+
+// Sekolah Dasar Section
+// ============================================================
+// DATA SOAL SEKOLAH DASAR
+
+const SD_MAPEL_LIST = [
+  { id: "bindo", label: "Bahasa Indonesia", icon: "📖", cls: "mapel-bindo" },
+  { id: "mtk", label: "Matematika", icon: "🔢", cls: "mapel-mtk" },
+  { id: "ipa", label: "IPA", icon: "🔬", cls: "mapel-ipa" },
+  { id: "ips", label: "IPS", icon: "🌍", cls: "mapel-ips" },
+  { id: "pai", label: "Pend. Agama Islam", icon: "🕌", cls: "mapel-pai" },
+  {
+    id: "bing",
+    label: "Bahasa Inggris",
+    icon: "img/english.png",
+    cls: "mapel-bing",
+  },
+];
+
+const SD_KELAS_LIST = [
+  { id: 1, label: "Kelas 1", icon: "1️⃣" },
+  { id: 2, label: "Kelas 2", icon: "2️⃣" },
+  { id: 3, label: "Kelas 3", icon: "3️⃣" },
+  { id: 4, label: "Kelas 4", icon: "4️⃣" },
+  { id: 5, label: "Kelas 5", icon: "5️⃣" },
+  { id: 6, label: "Kelas 6", icon: "6️⃣" },
+];
+
+// Helper buat soal
+function q(pertanyaan, opsi, benar, petunjuk) {
+  return {
+    q: pertanyaan,
+    options: opsi.map((o) => ({ label: o })),
+    correct: benar,
+    hint: petunjuk,
+  };
+}
+
+const SD_DATA = {
+  /* ══════════════════════════════════════════════════════════
+     KELAS 1
+  ══════════════════════════════════════════════════════════ */
+  1: {
+    bindo: [
+      q(
+        "Huruf apa yang pertama dalam alfabet?",
+        ["A", "B", "C", "D"],
+        0,
+        "Alfabet dimulai dari A!",
+      ),
+      q(
+        "Kata 'buku' terdiri dari berapa suku kata?",
+        ["1", "2", "3", "4"],
+        1,
+        "Bu-ku = 2 suku kata!",
+      ),
+      q(
+        "Manakah penulisan yang benar?",
+        ["ibu", "Ibu", "IBU", "ibu"],
+        1,
+        "Nama orang diawali huruf kapital!",
+      ),
+      q(
+        "Apa nama benda yang dipakai untuk menulis?",
+        ["Penghapus", "Penggaris", "Pensil", "Buku"],
+        2,
+        "Pensil digunakan untuk menulis!",
+      ),
+      q(
+        "Kata 'ayam' terdiri dari berapa huruf?",
+        ["3", "4", "5", "6"],
+        1,
+        "a-y-a-m = 4 huruf!",
+      ),
+      q(
+        "Manakah yang termasuk nama hewan?",
+        ["Meja", "Kucing", "Baju", "Buku"],
+        1,
+        "Kucing adalah hewan!",
+      ),
+      q(
+        "Suku kata pertama dari kata 'makan' adalah ...",
+        ["ma", "ka", "man", "akan"],
+        0,
+        "ma-kan, suku kata pertama: ma!",
+      ),
+      q(
+        "Kata 'sepatu' diawali huruf ...",
+        ["a", "e", "s", "p"],
+        2,
+        "Sepatu diawali huruf S!",
+      ),
+      q(
+        "Manakah nama buah?",
+        ["Mobil", "Mangga", "Meja", "Majalah"],
+        1,
+        "Mangga adalah buah!",
+      ),
+      q(
+        "'Adik membaca buku.' Siapa yang membaca?",
+        ["Ibu", "Kakak", "Adik", "Ayah"],
+        2,
+        "Subjek kalimat: Adik!",
+      ),
+      q(
+        "Kata 'pagi' berlawanan arti dengan ...",
+        ["siang", "sore", "malam", "subuh"],
+        2,
+        "Lawan pagi adalah malam!",
+      ),
+      q(
+        "Huruf vokal adalah ...",
+        ["b, c, d", "a, e, i, o, u", "p, q, r", "m, n, o"],
+        1,
+        "Vokal: a, e, i, o, u!",
+      ),
+      q(
+        "Kata yang artinya sama dengan 'besar' adalah ...",
+        ["kecil", "mungil", "raksasa", "tipis"],
+        2,
+        "Sinonim besar = raksasa!",
+      ),
+      q(
+        "Kalimat tanya diakhiri tanda ...",
+        [".", "!", "?", ","],
+        2,
+        "Kalimat tanya diakhiri tanda tanya!",
+      ),
+      q(
+        "Manakah kalimat yang benar?",
+        [
+          "adik main bola",
+          "Adik main bola.",
+          "adik Main bola",
+          "Adik Main Bola",
+        ],
+        1,
+        "Diawali huruf kapital, diakhiri titik!",
+      ),
+    ],
+    mtk: [
+      q("Berapakah 5 + 3?", ["6", "7", "8", "9"], 2, "Hitung jari: 5 + 3 = 8!"),
+      q("Berapakah 10 - 4?", ["4", "5", "6", "7"], 2, "10 dikurangi 4 = 6!"),
+      q(
+        "Angka berapa yang ada di antara 7 dan 9?",
+        ["6", "8", "10", "11"],
+        1,
+        "7, 8, 9 – angkanya 8!",
+      ),
+      q("Berapakah 3 + 7?", ["8", "9", "10", "11"], 2, "3 + 7 = 10!"),
+      q(
+        "Manakah angka yang paling besar?",
+        ["45", "54", "44", "55"],
+        3,
+        "55 adalah yang terbesar!",
+      ),
+      q("Berapakah 15 - 8?", ["6", "7", "8", "9"], 1, "15 - 8 = 7!"),
+      q("Berapakah 6 + 6?", ["10", "11", "12", "13"], 2, "6 + 6 = 12!"),
+      q(
+        "Angka dua puluh ditulis ...",
+        ["12", "20", "21", "22"],
+        1,
+        "Dua puluh = 20!",
+      ),
+      q(
+        "Rina punya 4 apel, diberi 5 lagi. Jumlahnya?",
+        ["8", "9", "10", "11"],
+        1,
+        "4 + 5 = 9!",
+      ),
+      q("Berapakah 9 - 3?", ["4", "5", "6", "7"], 2, "9 - 3 = 6!"),
+      q(
+        "Angka ganjil di bawah ini ...",
+        ["2", "4", "7", "8"],
+        2,
+        "Angka ganjil: 1,3,5,7,...!",
+      ),
+      q("Berapakah 20 + 5?", ["24", "25", "26", "30"], 1, "20 + 5 = 25!"),
+      q(
+        "Berapa sisi segitiga?",
+        ["2", "3", "4", "5"],
+        1,
+        "Segitiga punya 3 sisi!",
+      ),
+      q(
+        "Angka setelah 99 adalah ...",
+        ["90", "100", "101", "110"],
+        1,
+        "Setelah 99 adalah 100!",
+      ),
+      q("Berapakah 8 + 4?", ["10", "11", "12", "13"], 2, "8 + 4 = 12!"),
+    ],
+    ipa: [
+      q(
+        "Berapa jumlah anggota tubuh manusia yang dipakai untuk berjalan?",
+        ["1", "2", "3", "4"],
+        1,
+        "Dua kaki untuk berjalan!",
+      ),
+      q(
+        "Alat indra untuk melihat adalah ...",
+        ["hidung", "telinga", "mata", "mulut"],
+        2,
+        "Mata untuk melihat!",
+      ),
+      q(
+        "Hewan yang bisa terbang adalah ...",
+        ["kucing", "ikan", "burung", "kuda"],
+        2,
+        "Burung bisa terbang!",
+      ),
+      q(
+        "Tumbuhan membutuhkan ... untuk tumbuh.",
+        [
+          "air dan cahaya matahari",
+          "batu dan pasir",
+          "es dan salju",
+          "angin dan hujan es",
+        ],
+        0,
+        "Tumbuhan perlu air dan sinar matahari!",
+      ),
+      q(
+        "Alat indra untuk mendengar adalah ...",
+        ["mata", "hidung", "telinga", "lidah"],
+        2,
+        "Telinga untuk mendengar!",
+      ),
+      q(
+        "Bagian tubuh yang dipakai untuk mencium bau adalah ...",
+        ["hidung", "mata", "mulut", "tangan"],
+        0,
+        "Hidung untuk mencium!",
+      ),
+      q(
+        "Hewan yang hidup di air adalah ...",
+        ["kucing", "kambing", "ikan", "kelinci"],
+        2,
+        "Ikan hidup di air!",
+      ),
+      q(
+        "Buah yang berwarna kuning dan panjang adalah ...",
+        ["apel", "pisang", "jeruk", "mangga"],
+        1,
+        "Pisang berwarna kuning dan panjang!",
+      ),
+      q(
+        "Manusia bernapas menggunakan ...",
+        ["insang", "kulit", "paru-paru", "ekor"],
+        2,
+        "Manusia bernapas dengan paru-paru!",
+      ),
+      q(
+        "Alat indra untuk merasakan adalah ...",
+        ["mata", "lidah", "hidung", "telinga"],
+        1,
+        "Lidah untuk merasakan!",
+      ),
+      q(
+        "Hewan yang mengeluarkan suara 'moo' adalah ...",
+        ["kambing", "sapi", "kuda", "babi"],
+        1,
+        "Sapi bersuara moo!",
+      ),
+      q(
+        "Bagian tumbuhan yang ada di dalam tanah adalah ...",
+        ["daun", "batang", "bunga", "akar"],
+        3,
+        "Akar berada di dalam tanah!",
+      ),
+      q(
+        "Alat indra untuk meraba adalah ...",
+        ["mata", "kulit/tangan", "hidung", "telinga"],
+        1,
+        "Kulit/tangan untuk meraba!",
+      ),
+      q(
+        "Hewan peliharaan yang setia adalah ...",
+        ["singa", "harimau", "anjing", "buaya"],
+        2,
+        "Anjing dikenal sebagai hewan peliharaan setia!",
+      ),
+      q(
+        "Warna daun pada umumnya adalah ...",
+        ["merah", "biru", "hijau", "kuning"],
+        2,
+        "Daun umumnya berwarna hijau karena klorofil!",
+      ),
+    ],
+    ips: [
+      q(
+        "Anggota keluarga inti terdiri dari ...",
+        [
+          "ayah, ibu, anak",
+          "kakek, nenek, cucu",
+          "paman, bibi, keponakan",
+          "tetangga, teman, guru",
+        ],
+        0,
+        "Keluarga inti: ayah, ibu, dan anak!",
+      ),
+      q(
+        "Tempat tinggal keluarga disebut ...",
+        ["sekolah", "kantor", "rumah", "pasar"],
+        2,
+        "Keluarga tinggal di rumah!",
+      ),
+      q(
+        "Tugas ayah dalam keluarga adalah ...",
+        ["memasak", "mencari nafkah", "menyapu", "mengasuh bayi"],
+        1,
+        "Ayah mencari nafkah untuk keluarga!",
+      ),
+      q(
+        "Tempat kita belajar adalah ...",
+        ["pasar", "sekolah", "rumah sakit", "kantor"],
+        1,
+        "Kita belajar di sekolah!",
+      ),
+      q(
+        "Tetangga adalah orang yang tinggal ...",
+        [
+          "jauh dari kita",
+          "di dekat rumah kita",
+          "di kota lain",
+          "di luar negeri",
+        ],
+        1,
+        "Tetangga tinggal di dekat rumah kita!",
+      ),
+      q(
+        "Cara menyapa tetangga yang baik adalah ...",
+        ["diam saja", "mengucapkan salam", "mengabaikan", "berlari pergi"],
+        1,
+        "Menyapa tetangga dengan salam!",
+      ),
+      q(
+        "Yang bukan anggota keluarga inti adalah ...",
+        ["ayah", "ibu", "kakak", "paman"],
+        3,
+        "Paman bukan anggota keluarga inti!",
+      ),
+      q(
+        "Kegiatan di sekolah yang utama adalah ...",
+        ["bermain", "tidur", "belajar", "makan"],
+        2,
+        "Kegiatan utama di sekolah adalah belajar!",
+      ),
+      q(
+        "Lingkungan yang bersih membuat kita ...",
+        ["sakit", "sehat", "sedih", "malas"],
+        1,
+        "Lingkungan bersih = kita sehat!",
+      ),
+      q(
+        "Tugas ibu di rumah antara lain ...",
+        [
+          "bekerja di kantor",
+          "memasak dan merawat keluarga",
+          "berdagang di pasar",
+          "membangun rumah",
+        ],
+        1,
+        "Ibu memasak dan merawat keluarga!",
+      ),
+      q(
+        "Teman di sekolah disebut ...",
+        ["keluarga", "tetangga", "teman sekelas", "guru"],
+        2,
+        "Teman di sekolah disebut teman sekelas!",
+      ),
+      q(
+        "Untuk pergi ke sekolah kita bisa naik ...",
+        ["kapal selam", "pesawat ulang alik", "sepeda atau mobil", "roket"],
+        2,
+        "Pergi sekolah bisa naik sepeda atau mobil!",
+      ),
+      q(
+        "Kewajiban siswa di sekolah adalah ...",
+        [
+          "bermain terus",
+          "belajar dengan sungguh-sungguh",
+          "tidur di kelas",
+          "mengganggu teman",
+        ],
+        1,
+        "Kewajiban siswa: belajar sungguh-sungguh!",
+      ),
+      q(
+        "Yang termasuk aturan di rumah adalah ...",
+        [
+          "tidur di mana saja",
+          "membantu orang tua",
+          "membuang sampah sembarangan",
+          "teriak-teriak",
+        ],
+        1,
+        "Membantu orang tua adalah aturan baik di rumah!",
+      ),
+      q(
+        "Lambang negara Indonesia adalah ...",
+        ["singa", "garuda pancasila", "naga", "kuda"],
+        1,
+        "Lambang negara Indonesia: Garuda Pancasila!",
+      ),
+    ],
+    pai: [
+      q(
+        "Huruf hijaiyah pertama adalah ...",
+        ["Ba", "Ta", "Alif", "Jim"],
+        2,
+        "Huruf pertama hijaiyah adalah Alif (ا)!",
+      ),
+      q(
+        "Rukun Islam yang pertama adalah ...",
+        ["Puasa", "Shalat", "Syahadat", "Zakat"],
+        2,
+        "Rukun Islam pertama: Syahadat!",
+      ),
+      q(
+        "Doa sebelum makan diawali dengan ...",
+        ["Alhamdulillah", "Bismillah", "Subhanallah", "Insya Allah"],
+        1,
+        "Sebelum makan baca Bismillah!",
+      ),
+      q(
+        "Jumlah rakaat shalat Subuh adalah ...",
+        ["2", "3", "4", "5"],
+        0,
+        "Shalat Subuh 2 rakaat!",
+      ),
+      q(
+        "Kita shalat ... waktu dalam sehari.",
+        ["3", "4", "5", "6"],
+        2,
+        "Shalat 5 waktu sehari!",
+      ),
+      q(
+        "Setelah makan kita membaca ...",
+        ["Bismillah", "Alhamdulillah", "Subhanallah", "Allahu Akbar"],
+        1,
+        "Setelah makan baca Alhamdulillah!",
+      ),
+      q(
+        "Rukun Islam ada berapa?",
+        ["3", "4", "5", "6"],
+        2,
+        "Rukun Islam ada 5!",
+      ),
+      q(
+        "Kitab suci umat Islam adalah ...",
+        ["Injil", "Taurat", "Zabur", "Al-Quran"],
+        3,
+        "Kitab suci Islam adalah Al-Quran!",
+      ),
+      q(
+        "Tempat ibadah umat Islam adalah ...",
+        ["gereja", "pura", "masjid", "wihara"],
+        2,
+        "Umat Islam beribadah di masjid!",
+      ),
+      q(
+        "Nabi terakhir umat Islam adalah ...",
+        ["Nabi Isa", "Nabi Musa", "Nabi Ibrahim", "Nabi Muhammad SAW"],
+        3,
+        "Nabi terakhir: Muhammad SAW!",
+      ),
+      q(
+        "Doa masuk rumah diawali dengan ...",
+        ["Alhamdulillah", "Bismillah", "Assalamu'alaikum", "Subhanallah"],
+        1,
+        "Masuk rumah baca Bismillah!",
+      ),
+      q(
+        "Shalat Dzuhur terdiri dari ... rakaat.",
+        ["2", "3", "4", "5"],
+        2,
+        "Shalat Dzuhur 4 rakaat!",
+      ),
+      q(
+        "Huruf hijaiyah berjumlah ...",
+        ["26", "28", "30", "29"],
+        2,
+        "Huruf hijaiyah ada 29!",
+      ),
+      q(
+        "Salam lengkap dalam Islam adalah ...",
+        [
+          "Hai",
+          "Hello",
+          "Assalamu'alaikum Warahmatullahi Wabarakatuh",
+          "Selamat pagi",
+        ],
+        2,
+        "Salam Islam: Assalamu'alaikum...!",
+      ),
+      q(
+        "Puasa Ramadan dilaksanakan selama ... hari.",
+        ["20", "25", "29 atau 30", "28"],
+        2,
+        "Puasa Ramadan 29 atau 30 hari!",
+      ),
+    ],
+    bing: [
+      q(
+        "What color is the sky?",
+        ["Red", "Green", "Blue", "Yellow"],
+        2,
+        "The sky is blue!",
+      ),
+      q(
+        "What is 'apel' in English?",
+        ["Banana", "Apple", "Mango", "Orange"],
+        1,
+        "Apel = Apple!",
+      ),
+      q(
+        "How do you say 'selamat pagi' in English?",
+        ["Good night", "Good afternoon", "Good morning", "Good evening"],
+        2,
+        "Selamat pagi = Good morning!",
+      ),
+      q(
+        "What letter comes after 'D' in the alphabet?",
+        ["C", "E", "F", "G"],
+        1,
+        "D, E, F... next is E!",
+      ),
+      q(
+        "What color is a banana?",
+        ["Red", "Blue", "Yellow", "Green"],
+        2,
+        "Banana is yellow!",
+      ),
+      q(
+        "How many letters in the English alphabet?",
+        ["24", "25", "26", "27"],
+        2,
+        "There are 26 letters!",
+      ),
+      q(
+        "What is the number '5' in English?",
+        ["Four", "Six", "Five", "Three"],
+        2,
+        "5 = Five!",
+      ),
+      q(
+        "What color is grass?",
+        ["Blue", "Green", "Yellow", "Red"],
+        1,
+        "Grass is green!",
+      ),
+      q(
+        "What is 'ibu' in English?",
+        ["Father", "Sister", "Mother", "Brother"],
+        2,
+        "Ibu = Mother!",
+      ),
+      q(
+        "What number comes after 9?",
+        ["8", "11", "10", "12"],
+        2,
+        "After 9 is 10!",
+      ),
+      q(
+        "What is 'merah' in English?",
+        ["Blue", "Red", "Green", "Yellow"],
+        1,
+        "Merah = Red!",
+      ),
+      q(
+        "What is 'ayah' in English?",
+        ["Mother", "Sister", "Brother", "Father"],
+        3,
+        "Ayah = Father!",
+      ),
+      q(
+        "How do you say 'selamat malam'?",
+        ["Good morning", "Good afternoon", "Good night", "Good evening"],
+        2,
+        "Selamat malam = Good night!",
+      ),
+      q(
+        "What letter comes before 'C'?",
+        ["A", "B", "D", "E"],
+        1,
+        "A, B, C – before C is B!",
+      ),
+      q(
+        "What color is the sun?",
+        ["Blue", "White", "Yellow", "Red"],
+        2,
+        "The sun is yellow!",
+      ),
+    ],
+  },
+
+  /* ══════════════════════════════════════════════════════════
+     KELAS 2
+  ══════════════════════════════════════════════════════════ */
+  2: {
+    bindo: [
+      q(
+        "Kalimat 'Adik bermain bola.' adalah kalimat ...",
+        ["tanya", "perintah", "pernyataan", "seru"],
+        2,
+        "Kalimat yang menyatakan sesuatu = kalimat pernyataan!",
+      ),
+      q(
+        "Kata yang maknanya berlawanan disebut ...",
+        ["sinonim", "antonim", "homonim", "polisemi"],
+        1,
+        "Kata berlawanan makna = antonim!",
+      ),
+      q(
+        "Antonim dari kata 'rajin' adalah ...",
+        ["tekun", "giat", "malas", "semangat"],
+        2,
+        "Lawan rajin = malas!",
+      ),
+      q(
+        "Kalimat 'Tutup pintunya!' adalah kalimat ...",
+        ["tanya", "perintah", "pernyataan", "seru"],
+        1,
+        "Kalimat perintah berisi perintah/larangan!",
+      ),
+      q(
+        "Sinonim dari kata 'senang' adalah ...",
+        ["sedih", "murung", "gembira", "kecewa"],
+        2,
+        "Sinonim senang = gembira!",
+      ),
+      q(
+        "Kosakata baru yang belum diketahui maknanya dapat dicari di ...",
+        ["koran", "kamus", "majalah", "buku gambar"],
+        1,
+        "Mencari makna kata di kamus!",
+      ),
+      q(
+        "Kalimat 'Mengapa kamu terlambat?' adalah kalimat ...",
+        ["tanya", "perintah", "pernyataan", "seru"],
+        0,
+        "Kalimat yang bertanya = kalimat tanya!",
+      ),
+      q(
+        "Cara membaca yang baik adalah ...",
+        [
+          "cepat tanpa memahami",
+          "pelan dan memahami isi",
+          "sambil tidur",
+          "sambil berlari",
+        ],
+        1,
+        "Membaca yang baik: pelan dan memahami isi!",
+      ),
+      q(
+        "Kata 'hutan' berarti ...",
+        [
+          "daerah perkotaan",
+          "wilayah dengan banyak pohon",
+          "ladang pertanian",
+          "lautan luas",
+        ],
+        1,
+        "Hutan = wilayah dengan banyak pohon!",
+      ),
+      q(
+        "Paragraf adalah ...",
+        [
+          "satu kalimat saja",
+          "sekumpulan kalimat yang berkaitan",
+          "satu kata saja",
+          "judul cerita",
+        ],
+        1,
+        "Paragraf = sekumpulan kalimat yang berkaitan!",
+      ),
+      q(
+        "Huruf kapital digunakan di ...",
+        [
+          "semua kata",
+          "awal kalimat dan nama diri",
+          "akhir kalimat",
+          "tengah kalimat",
+        ],
+        1,
+        "Huruf kapital untuk awal kalimat dan nama diri!",
+      ),
+      q(
+        "Cerita pendek biasanya memiliki ...",
+        ["tokoh, latar, dan alur", "hanya tokoh", "hanya latar", "hanya alur"],
+        0,
+        "Cerita pendek punya tokoh, latar, dan alur!",
+      ),
+      q(
+        "Antonim 'panas' adalah ...",
+        ["hangat", "dingin", "sejuk", "terik"],
+        1,
+        "Lawan panas = dingin!",
+      ),
+      q(
+        "Tanda koma (,) digunakan untuk ...",
+        [
+          "mengakhiri kalimat",
+          "pemisah dalam kalimat",
+          "kalimat tanya",
+          "kalimat seru",
+        ],
+        1,
+        "Koma untuk pemisah dalam kalimat!",
+      ),
+      q(
+        "Kata 'berlari' berasal dari kata dasar ...",
+        ["ber", "berlari", "lari", "larian"],
+        2,
+        "Kata dasar berlari = lari!",
+      ),
+    ],
+    mtk: [
+      q("Berapakah 15 × 2?", ["25", "30", "35", "40"], 1, "15 × 2 = 30!"),
+      q("Berapakah 24 ÷ 4?", ["4", "5", "6", "7"], 2, "24 ÷ 4 = 6!"),
+      q(
+        "Bangun datar yang memiliki 4 sisi sama panjang disebut ...",
+        ["persegi panjang", "segitiga", "persegi", "lingkaran"],
+        2,
+        "Persegi punya 4 sisi sama panjang!",
+      ),
+      q(
+        "Berapa cm dalam 1 meter?",
+        ["10", "100", "1000", "10000"],
+        1,
+        "1 meter = 100 cm!",
+      ),
+      q("Berapakah 32 + 48?", ["70", "78", "80", "82"], 2, "32 + 48 = 80!"),
+      q("Berapakah 56 - 29?", ["25", "27", "28", "30"], 1, "56 - 29 = 27!"),
+      q("Berapakah 7 × 8?", ["48", "54", "56", "63"], 2, "7 × 8 = 56!"),
+      q(
+        "Berapa sisi pada persegi panjang?",
+        ["2", "3", "4", "5"],
+        2,
+        "Persegi panjang punya 4 sisi!",
+      ),
+      q("Berapakah 45 ÷ 9?", ["4", "5", "6", "7"], 1, "45 ÷ 9 = 5!"),
+      q(
+        "Manakah pecahan terbesar?",
+        ["1/4", "1/3", "1/2", "1/8"],
+        2,
+        "1/2 adalah yang terbesar!",
+      ),
+      q(
+        "Panjang penggaris 30 cm = ... mm",
+        ["3", "30", "300", "3000"],
+        2,
+        "30 cm = 300 mm!",
+      ),
+      q("Berapakah 9 × 9?", ["72", "81", "90", "78"], 1, "9 × 9 = 81!"),
+      q(
+        "Bangun datar yang bulat sempurna disebut ...",
+        ["persegi", "segitiga", "lingkaran", "belah ketupat"],
+        2,
+        "Bangun bulat = lingkaran!",
+      ),
+      q("Berapakah 100 - 37?", ["53", "62", "63", "73"], 2, "100 - 37 = 63!"),
+      q(
+        "Berapa kg dalam 1 ton?",
+        ["10", "100", "1000", "10000"],
+        2,
+        "1 ton = 1000 kg!",
+      ),
+    ],
+    ipa: [
+      q(
+        "Makhluk hidup perlu makan untuk ...",
+        ["tidur", "mendapat energi", "bermain", "bergerak saja"],
+        1,
+        "Makan untuk mendapat energi!",
+      ),
+      q(
+        "Lingkungan yang tercemar membuat ...",
+        ["hewan sehat", "udara bersih", "makhluk hidup sakit", "tanaman subur"],
+        2,
+        "Lingkungan tercemar membuat makhluk hidup sakit!",
+      ),
+      q(
+        "Kegunaan benda 'payung' adalah ...",
+        ["menulis", "melindungi dari hujan", "memotong", "memasak"],
+        1,
+        "Payung untuk melindungi dari hujan!",
+      ),
+      q(
+        "Tumbuhan yang daunnya bisa dimakan langsung adalah ...",
+        ["mawar", "kaktus", "selada", "beringin"],
+        2,
+        "Selada bisa dimakan langsung!",
+      ),
+      q(
+        "Proses tumbuhan membuat makanannya sendiri disebut ...",
+        ["respirasi", "fotosintesis", "adaptasi", "reproduksi"],
+        1,
+        "Tumbuhan buat makanan = fotosintesis!",
+      ),
+      q(
+        "Hewan yang makan tumbuhan disebut ...",
+        ["karnivora", "herbivora", "omnivora", "predator"],
+        1,
+        "Pemakan tumbuhan = herbivora!",
+      ),
+      q(
+        "Kegunaan benda 'termometer' adalah ...",
+        [
+          "mengukur panjang",
+          "mengukur suhu",
+          "mengukur berat",
+          "mengukur waktu",
+        ],
+        1,
+        "Termometer untuk mengukur suhu!",
+      ),
+      q(
+        "Lingkungan hidup yang baik untuk ikan adalah ...",
+        ["udara kering", "air bersih", "tanah kering", "padang pasir"],
+        1,
+        "Ikan hidup di air bersih!",
+      ),
+      q(
+        "Hewan yang makan daging disebut ...",
+        ["herbivora", "karnivora", "omnivora", "insektivora"],
+        1,
+        "Pemakan daging = karnivora!",
+      ),
+      q(
+        "Sumber energi utama di bumi adalah ...",
+        ["bulan", "bintang", "matahari", "angin"],
+        2,
+        "Sumber energi utama = matahari!",
+      ),
+      q(
+        "Kegunaan benda 'kacamata' adalah ...",
+        ["menulis", "membaca lebih jelas", "memasak", "tidur"],
+        1,
+        "Kacamata untuk melihat lebih jelas!",
+      ),
+      q(
+        "Air yang aman untuk diminum adalah air ...",
+        ["keruh", "bau", "berwarna", "bersih dan jernih"],
+        3,
+        "Air minum harus bersih dan jernih!",
+      ),
+      q(
+        "Makhluk hidup yang bisa membuat makanan sendiri adalah ...",
+        ["hewan", "manusia", "tumbuhan", "jamur"],
+        2,
+        "Tumbuhan bisa buat makanan sendiri!",
+      ),
+      q(
+        "Udara yang kita hirup mengandung gas ...",
+        ["karbondioksida", "oksigen", "nitrogen", "hidrogen"],
+        1,
+        "Kita menghirup oksigen!",
+      ),
+      q(
+        "Hewan yang bertelur adalah ...",
+        ["kucing", "anjing", "ayam", "sapi"],
+        2,
+        "Ayam berkembang biak dengan bertelur!",
+      ),
+    ],
+    ips: [
+      q(
+        "Lingkungan di sekitar rumah kita disebut ...",
+        ["kota", "lingkungan sekitar", "negara", "benua"],
+        1,
+        "Lingkungan di dekat rumah = lingkungan sekitar!",
+      ),
+      q(
+        "Orang yang bekerja menjaga keamanan adalah ...",
+        ["dokter", "guru", "polisi", "petani"],
+        2,
+        "Polisi menjaga keamanan!",
+      ),
+      q(
+        "Kerja sama antar warga disebut ...",
+        ["gotong royong", "berdebat", "bertengkar", "bersaing"],
+        0,
+        "Kerja sama warga = gotong royong!",
+      ),
+      q(
+        "Profesi yang mengajar di sekolah adalah ...",
+        ["dokter", "guru", "polisi", "petani"],
+        1,
+        "Guru mengajar di sekolah!",
+      ),
+      q(
+        "Pasar adalah tempat untuk ...",
+        ["belajar", "berjual beli", "berobat", "beribadah"],
+        1,
+        "Pasar = tempat jual beli!",
+      ),
+      q(
+        "Profesi yang menjaga kesehatan masyarakat adalah ...",
+        ["pilot", "dokter", "guru", "petani"],
+        1,
+        "Dokter menjaga kesehatan!",
+      ),
+      q(
+        "Manfaat kerja sama dalam masyarakat adalah ...",
+        [
+          "pekerjaan lebih berat",
+          "pekerjaan lebih cepat selesai",
+          "menambah masalah",
+          "tidak ada manfaat",
+        ],
+        1,
+        "Kerja sama = pekerjaan cepat selesai!",
+      ),
+      q(
+        "Orang yang menanam padi di sawah adalah ...",
+        ["nelayan", "petani", "pedagang", "tukang kayu"],
+        1,
+        "Petani menanam padi di sawah!",
+      ),
+      q(
+        "Kebersihan lingkungan adalah tanggung jawab ...",
+        [
+          "pemerintah saja",
+          "satu orang saja",
+          "semua warga",
+          "petugas kebersihan saja",
+        ],
+        2,
+        "Kebersihan = tanggung jawab semua warga!",
+      ),
+      q(
+        "Alat transportasi yang berjalan di atas rel adalah ...",
+        ["bus", "kapal", "kereta api", "pesawat"],
+        2,
+        "Kereta api berjalan di atas rel!",
+      ),
+      q(
+        "Profesi yang menangkap ikan di laut adalah ...",
+        ["petani", "nelayan", "pedagang", "tukang batu"],
+        1,
+        "Nelayan menangkap ikan di laut!",
+      ),
+      q(
+        "Denah adalah ...",
+        [
+          "foto udara",
+          "gambar/peta suatu tempat",
+          "cerita tentang daerah",
+          "karangan bebas",
+        ],
+        1,
+        "Denah = gambar/peta suatu tempat!",
+      ),
+      q(
+        "Alat komunikasi yang bisa dibawa ke mana-mana adalah ...",
+        ["televisi", "telepon rumah", "telepon genggam/HP", "radio besar"],
+        2,
+        "HP bisa dibawa ke mana-mana!",
+      ),
+      q(
+        "Orang yang membangun gedung dan jembatan adalah ...",
+        ["dokter", "arsitek/insinyur", "guru", "nelayan"],
+        1,
+        "Arsitek/insinyur membangun gedung!",
+      ),
+      q(
+        "Kegiatan ekonomi yang menghasilkan barang disebut ...",
+        ["konsumsi", "distribusi", "produksi", "jasa"],
+        2,
+        "Menghasilkan barang = produksi!",
+      ),
+    ],
+    pai: [
+      q(
+        "Rukun Iman yang pertama adalah ...",
+        [
+          "Iman kepada Malaikat",
+          "Iman kepada Allah",
+          "Iman kepada Rasul",
+          "Iman kepada Kitab",
+        ],
+        1,
+        "Rukun Iman pertama: Iman kepada Allah!",
+      ),
+      q(
+        "Jumlah Rukun Iman ada ...",
+        ["4", "5", "6", "7"],
+        2,
+        "Rukun Iman ada 6!",
+      ),
+      q(
+        "Malaikat yang bertugas menyampaikan wahyu adalah ...",
+        ["Mikail", "Izrail", "Jibril", "Israfil"],
+        2,
+        "Malaikat Jibril menyampaikan wahyu!",
+      ),
+      q(
+        "Adab makan yang baik adalah ...",
+        [
+          "berdiri",
+          "sambil berbicara keras",
+          "duduk dan baca doa",
+          "berbaring",
+        ],
+        2,
+        "Makan sambil duduk dan baca doa!",
+      ),
+      q(
+        "Malaikat yang bertugas mencabut nyawa adalah ...",
+        ["Jibril", "Mikail", "Israfil", "Izrail"],
+        3,
+        "Malaikat Izrail mencabut nyawa!",
+      ),
+      q(
+        "Sifat wajib Allah yang berarti Maha Ada adalah ...",
+        ["Qidam", "Wujud", "Baqa", "Mukhalafah"],
+        1,
+        "Wujud = Maha Ada!",
+      ),
+      q(
+        "Adab kepada orang tua yang baik adalah ...",
+        [
+          "membantah",
+          "berbicara kasar",
+          "menghormati dan patuh",
+          "mengabaikan",
+        ],
+        2,
+        "Adab kepada orang tua: hormati dan patuh!",
+      ),
+      q(
+        "Malaikat yang bertugas membagi rezeki adalah ...",
+        ["Jibril", "Mikail", "Israfil", "Raqib"],
+        1,
+        "Malaikat Mikail membagi rezeki!",
+      ),
+      q(
+        "Jumlah malaikat yang wajib diketahui ada ...",
+        ["8", "10", "12", "15"],
+        1,
+        "Malaikat yang wajib diketahui: 10!",
+      ),
+      q(
+        "Adab masuk masjid yang benar dimulai dengan kaki ...",
+        ["kiri", "kanan", "mana saja", "berlari"],
+        1,
+        "Masuk masjid dengan kaki kanan!",
+      ),
+      q(
+        "Malaikat Raqib bertugas mencatat amal ...",
+        ["buruk", "biasa", "baik", "netral"],
+        2,
+        "Raqib mencatat amal baik!",
+      ),
+      q(
+        "Malaikat Atid bertugas mencatat amal ...",
+        ["baik", "netral", "biasa", "buruk"],
+        3,
+        "Atid mencatat amal buruk!",
+      ),
+      q(
+        "Shalat lima waktu merupakan Rukun Islam ke ...",
+        ["1", "2", "3", "4"],
+        1,
+        "Shalat lima waktu = Rukun Islam ke-2!",
+      ),
+      q(
+        "Kita harus berkata ...",
+        ["bohong", "kasar", "jujur", "diam saja"],
+        2,
+        "Kita harus selalu berkata jujur!",
+      ),
+      q(
+        "Malaikat yang meniup sangkakala adalah ...",
+        ["Jibril", "Mikail", "Izrail", "Israfil"],
+        3,
+        "Israfil meniup sangkakala!",
+      ),
+    ],
+    bing: [
+      q(
+        "What animal says 'moo'?",
+        ["Dog", "Cat", "Cow", "Bird"],
+        2,
+        "Cow says moo!",
+      ),
+      q(
+        "What fruit is yellow and long?",
+        ["Apple", "Banana", "Orange", "Mango"],
+        1,
+        "Banana is yellow and long!",
+      ),
+      q(
+        "Who is your mother's mother?",
+        ["Aunt", "Grandmother", "Sister", "Cousin"],
+        1,
+        "Mother's mother = Grandmother!",
+      ),
+      q(
+        "What color is an orange?",
+        ["Red", "Blue", "Orange", "Green"],
+        2,
+        "An orange is orange!",
+      ),
+      q(
+        "How many legs does a dog have?",
+        ["2", "4", "6", "8"],
+        1,
+        "A dog has 4 legs!",
+      ),
+      q(
+        "What fruit is red and round?",
+        ["Banana", "Apple", "Mango", "Pineapple"],
+        1,
+        "Apple is red and round!",
+      ),
+      q(
+        "Who is your father's brother?",
+        ["Grandfather", "Uncle", "Cousin", "Brother"],
+        1,
+        "Father's brother = Uncle!",
+      ),
+      q(
+        "What animal can fly?",
+        ["Fish", "Dog", "Cat", "Bird"],
+        3,
+        "Bird can fly!",
+      ),
+      q(
+        "What color are bananas?",
+        ["Red", "Blue", "Yellow", "Green"],
+        2,
+        "Bananas are yellow!",
+      ),
+      q(
+        "What is 'adik perempuan' in English?",
+        ["Brother", "Sister", "Cousin", "Aunt"],
+        1,
+        "Adik perempuan = Sister!",
+      ),
+      q(
+        "How many days are in a week?",
+        ["5", "6", "7", "8"],
+        2,
+        "There are 7 days in a week!",
+      ),
+      q(
+        "What animal lives in the sea?",
+        ["Dog", "Rabbit", "Fish", "Chicken"],
+        2,
+        "Fish lives in the sea!",
+      ),
+      q(
+        "What is the color of milk?",
+        ["Black", "Red", "White", "Blue"],
+        2,
+        "Milk is white!",
+      ),
+      q(
+        "How many months are in a year?",
+        ["10", "11", "12", "13"],
+        2,
+        "There are 12 months in a year!",
+      ),
+      q(
+        "What fruit is orange and round?",
+        ["Apple", "Banana", "Orange", "Mango"],
+        2,
+        "Orange is orange and round!",
+      ),
+    ],
+  },
+
+  /* ══════════════════════════════════════════════════════════
+     KELAS 3
+  ══════════════════════════════════════════════════════════ */
+  3: {
+    bindo: [
+      q(
+        "Ide pokok suatu paragraf biasanya terletak di ...",
+        [
+          "tengah paragraf",
+          "awal atau akhir paragraf",
+          "semua kalimat",
+          "tidak ada",
+        ],
+        1,
+        "Ide pokok biasanya di awal atau akhir paragraf!",
+      ),
+      q(
+        "Teks yang menceritakan kisah khayal disebut ...",
+        ["cerpen", "dongeng", "berita", "laporan"],
+        1,
+        "Kisah khayal = dongeng!",
+      ),
+      q(
+        "Sinonim kata 'bijak' adalah ...",
+        ["bodoh", "cerdas", "malas", "nakal"],
+        1,
+        "Sinonim bijak = cerdas!",
+      ),
+      q(
+        "Tanda titik (.) digunakan untuk ...",
+        [
+          "kalimat tanya",
+          "kalimat seru",
+          "mengakhiri kalimat pernyataan",
+          "pemisah",
+        ],
+        2,
+        "Titik untuk mengakhiri kalimat pernyataan!",
+      ),
+      q(
+        "Kalimat utama adalah kalimat yang berisi ...",
+        ["rincian", "contoh", "ide pokok", "penutup"],
+        2,
+        "Kalimat utama = berisi ide pokok!",
+      ),
+      q(
+        "Cerita yang tokohnya binatang disebut ...",
+        ["legenda", "fabel", "mitos", "saga"],
+        1,
+        "Cerita tokoh binatang = fabel!",
+      ),
+      q(
+        "Antonim kata 'keras' adalah ...",
+        ["kuat", "padat", "lembut", "berat"],
+        2,
+        "Lawan keras = lembut!",
+      ),
+      q(
+        "Penulisan surat yang baik dimulai dengan ...",
+        ["isi surat", "penutup", "salam pembuka", "nama pengirim"],
+        2,
+        "Surat dimulai dengan salam pembuka!",
+      ),
+      q(
+        "Kata 'berlomba' mendapat awalan ...",
+        ["ber-", "me-", "di-", "ter-"],
+        0,
+        "Berlomba = ber + lomba!",
+      ),
+      q(
+        "Gagasan yang mendasari sebuah paragraf disebut ...",
+        ["kalimat penjelas", "ide pokok", "kesimpulan", "judul"],
+        1,
+        "Ide pokok = gagasan utama paragraf!",
+      ),
+      q(
+        "Tanda seru (!) digunakan untuk kalimat ...",
+        ["tanya", "pernyataan", "seru/perintah", "biasa"],
+        2,
+        "Tanda seru untuk kalimat seru/perintah!",
+      ),
+      q(
+        "Kata yang bunyinya sama tapi maknanya berbeda disebut ...",
+        ["sinonim", "antonim", "homonim", "polisemi"],
+        2,
+        "Bunyi sama, makna beda = homonim!",
+      ),
+      q(
+        "Paragraf yang berisi simpulan biasanya ada di ...",
+        ["awal", "tengah", "akhir", "mana saja"],
+        2,
+        "Simpulan biasanya di akhir paragraf!",
+      ),
+      q(
+        "Perubahan kata dasar 'jalan' menjadi 'berjalan' menggunakan ...",
+        ["awalan me-", "awalan ber-", "akhiran -an", "sisipan -el-"],
+        1,
+        "Berjalan = ber + jalan!",
+      ),
+      q(
+        "Cerita tentang asal usul suatu tempat disebut ...",
+        ["fabel", "dongeng", "legenda", "cerpen"],
+        2,
+        "Asal usul tempat = legenda!",
+      ),
+    ],
+    mtk: [
+      q(
+        "Berapakah 12 × 12?",
+        ["124", "134", "144", "154"],
+        2,
+        "12 × 12 = 144!",
+      ),
+      q("Berapakah 72 ÷ 8?", ["7", "8", "9", "10"], 2, "72 ÷ 8 = 9!"),
+      q(
+        "Pecahan 1/2 sama dengan ...",
+        ["2/5", "3/6", "4/9", "2/3"],
+        1,
+        "1/2 = 2/4 = 3/6!",
+      ),
+      q(
+        "Berapakah 125 + 256?",
+        ["371", "381", "391", "401"],
+        1,
+        "125 + 256 = 381!",
+      ),
+      q(
+        "Berapakah 500 - 175?",
+        ["315", "325", "335", "345"],
+        1,
+        "500 - 175 = 325!",
+      ),
+      q(
+        "Manakah pecahan terkecil?",
+        ["1/2", "1/3", "1/4", "1/5"],
+        3,
+        "1/5 paling kecil!",
+      ),
+      q(
+        "Berapakah keliling persegi dengan sisi 6 cm?",
+        ["18 cm", "24 cm", "36 cm", "30 cm"],
+        1,
+        "Keliling = 4 × 6 = 24 cm!",
+      ),
+      q(
+        "Berapakah 11 × 11?",
+        ["111", "121", "131", "141"],
+        1,
+        "11 × 11 = 121!",
+      ),
+      q("Pembagian 84 ÷ 7 = ...", ["10", "11", "12", "13"], 2, "84 ÷ 7 = 12!"),
+      q(
+        "1/4 + 1/4 = ...",
+        ["1/2", "1/4", "2/8", "2/4"],
+        0,
+        "1/4 + 1/4 = 2/4 = 1/2!",
+      ),
+      q(
+        "Berapakah luas persegi dengan sisi 5 cm?",
+        ["20 cm²", "25 cm²", "30 cm²", "35 cm²"],
+        1,
+        "Luas = 5 × 5 = 25 cm²!",
+      ),
+      q("Berapakah 9 × 7?", ["56", "63", "72", "81"], 1, "9 × 7 = 63!"),
+      q(
+        "Berapakah 200 - 88?",
+        ["102", "111", "112", "122"],
+        2,
+        "200 - 88 = 112!",
+      ),
+      q(
+        "Pecahan yang nilainya sama dengan 2/4 adalah ...",
+        ["1/2", "1/3", "2/3", "3/4"],
+        0,
+        "2/4 = 1/2!",
+      ),
+      q("Berapakah 13 × 5?", ["60", "65", "70", "75"], 1, "13 × 5 = 65!"),
+    ],
+    ipa: [
+      q(
+        "Cuaca yang ditandai dengan langit mendung adalah ...",
+        ["cerah", "berawan", "hujan", "berangin"],
+        1,
+        "Langit mendung = cuaca berawan!",
+      ),
+      q(
+        "Energi yang dihasilkan matahari adalah energi ...",
+        ["kimia", "listrik", "panas/cahaya", "bunyi"],
+        2,
+        "Matahari menghasilkan energi panas dan cahaya!",
+      ),
+      q(
+        "Daur hidup kupu-kupu: telur → ... → kepompong → kupu-kupu",
+        ["kupu-kupu muda", "ulat", "pupa", "nimfa"],
+        1,
+        "Telur → ulat → kepompong → kupu-kupu!",
+      ),
+      q(
+        "Sumber energi terbarukan adalah ...",
+        ["batu bara", "minyak bumi", "angin", "gas alam"],
+        2,
+        "Angin adalah energi terbarukan!",
+      ),
+      q(
+        "Ketika hujan lebat sering terjadi ...",
+        ["badai pasir", "banjir", "kebakaran hutan", "gempa bumi"],
+        1,
+        "Hujan lebat bisa menyebabkan banjir!",
+      ),
+      q(
+        "Daur hidup katak: telur → berudu → ... → katak",
+        ["kecebong dewasa", "katak muda", "berudu besar", "katak berekor"],
+        2,
+        "Telur → berudu → katak muda → katak!",
+      ),
+      q(
+        "Energi yang berasal dari makanan yang kita makan adalah energi ...",
+        ["listrik", "kimia", "cahaya", "panas"],
+        1,
+        "Makanan mengandung energi kimia!",
+      ),
+      q(
+        "Pelangi muncul setelah ...",
+        ["gempa", "hujan", "angin kencang", "salju"],
+        1,
+        "Pelangi muncul setelah hujan!",
+      ),
+      q(
+        "Hewan yang mengalami metamorfosis sempurna adalah ...",
+        [
+          "katak dan kupu-kupu",
+          "ayam dan bebek",
+          "kucing dan anjing",
+          "sapi dan kambing",
+        ],
+        0,
+        "Katak dan kupu-kupu: metamorfosis sempurna!",
+      ),
+      q(
+        "Energi listrik bisa berasal dari ...",
+        ["air terjun (PLTA)", "batu", "pasir", "debu"],
+        0,
+        "Air terjun menghasilkan listrik (PLTA)!",
+      ),
+      q(
+        "Musim hujan di Indonesia terjadi sekitar bulan ...",
+        ["Maret–September", "Oktober–April", "Juli–Desember", "Januari–Juni"],
+        1,
+        "Musim hujan sekitar Oktober–April!",
+      ),
+      q(
+        "Daur hidup ayam: telur → ... → ayam dewasa",
+        ["anak ayam", "ulat", "kepompong", "pupa"],
+        0,
+        "Telur → anak ayam → ayam dewasa!",
+      ),
+      q(
+        "Angin yang kencang dapat dimanfaatkan sebagai sumber energi oleh ...",
+        ["panel surya", "kincir angin", "generator bensin", "baterai"],
+        1,
+        "Kincir angin memanfaatkan energi angin!",
+      ),
+      q(
+        "Saat kemarau panjang dapat terjadi ...",
+        ["banjir", "kekeringan", "badai salju", "tsunami"],
+        1,
+        "Kemarau panjang menyebabkan kekeringan!",
+      ),
+      q(
+        "Hewan yang tidak mengalami metamorfosis adalah ...",
+        ["kupu-kupu", "katak", "nyamuk", "ayam"],
+        3,
+        "Ayam tidak mengalami metamorfosis!",
+      ),
+    ],
+    ips: [
+      q(
+        "Profesi yang bertugas membuat rancangan bangunan adalah ...",
+        ["dokter", "arsitek", "guru", "polisi"],
+        1,
+        "Arsitek merancang bangunan!",
+      ),
+      q(
+        "Tempat yang menunjukkan arah pada peta disebut ...",
+        ["skala", "legenda", "mata angin", "simbol"],
+        2,
+        "Mata angin menunjukkan arah pada peta!",
+      ),
+      q(
+        "Kegiatan jual beli yang dilakukan antar negara disebut ...",
+        ["pasar lokal", "perdagangan internasional", "barter", "koperasi"],
+        1,
+        "Jual beli antar negara = perdagangan internasional!",
+      ),
+      q(
+        "Pada peta, warna biru biasanya menggambarkan ...",
+        [
+          "dataran tinggi",
+          "hutan",
+          "perairan (laut, sungai, danau)",
+          "perkotaan",
+        ],
+        2,
+        "Biru di peta = perairan!",
+      ),
+      q(
+        "Kegiatan menggunakan barang/jasa disebut ...",
+        ["produksi", "distribusi", "konsumsi", "transaksi"],
+        2,
+        "Menggunakan barang = konsumsi!",
+      ),
+      q(
+        "Tempat penjualan sayur, buah, dan kebutuhan sehari-hari adalah ...",
+        ["mal", "supermarket", "pasar tradisional", "toko elektronik"],
+        2,
+        "Pasar tradisional menjual kebutuhan sehari-hari!",
+      ),
+      q(
+        "Peta yang menggambarkan kepadatan penduduk disebut peta ...",
+        ["topografi", "tematik", "cuaca", "navigasi"],
+        1,
+        "Peta kepadatan penduduk = peta tematik!",
+      ),
+      q(
+        "Orang yang menyalurkan barang dari produsen ke konsumen disebut ...",
+        ["produsen", "konsumen", "distributor", "investor"],
+        2,
+        "Penyalur barang = distributor!",
+      ),
+      q(
+        "Profesi guru termasuk jenis pekerjaan di bidang ...",
+        ["pertanian", "industri", "jasa", "perdagangan"],
+        2,
+        "Guru = pekerjaan di bidang jasa!",
+      ),
+      q(
+        "Skala pada peta digunakan untuk ...",
+        [
+          "menunjukkan arah",
+          "menentukan warna",
+          "mengukur jarak",
+          "menandai tempat",
+        ],
+        2,
+        "Skala untuk mengukur jarak pada peta!",
+      ),
+      q(
+        "Kebutuhan pokok manusia yang utama adalah ...",
+        [
+          "sandang, pangan, papan",
+          "emas, perak, berlian",
+          "mobil, motor, kapal",
+          "komputer, HP, televisi",
+        ],
+        0,
+        "Kebutuhan pokok: sandang, pangan, papan!",
+      ),
+      q(
+        "Profesi yang membutuhkan keahlian menjahit adalah ...",
+        ["penjahit/desainer", "dokter", "pilot", "petani"],
+        0,
+        "Menjahit = profesi penjahit/desainer!",
+      ),
+      q(
+        "Koperasi merupakan usaha yang berdasarkan asas ...",
+        ["keuntungan pribadi", "kekeluargaan", "persaingan bebas", "monopoli"],
+        1,
+        "Koperasi berdasarkan asas kekeluargaan!",
+      ),
+      q(
+        "Legenda pada peta adalah ...",
+        [
+          "nama pembuat peta",
+          "keterangan simbol-simbol pada peta",
+          "arah utara",
+          "skala peta",
+        ],
+        1,
+        "Legenda = keterangan simbol pada peta!",
+      ),
+      q(
+        "Sumber daya alam yang tidak dapat diperbarui adalah ...",
+        ["air", "udara", "hutan", "minyak bumi"],
+        3,
+        "Minyak bumi tidak bisa diperbarui!",
+      ),
+    ],
+    pai: [
+      q(
+        "Surat pendek yang dibaca di setiap rakaat shalat adalah ...",
+        ["Al-Baqarah", "Al-Ikhlas", "Al-Imran", "An-Nisa"],
+        1,
+        "Al-Ikhlas sering dibaca saat shalat!",
+      ),
+      q(
+        "Akhlak yang baik kepada sesama manusia disebut akhlak ...",
+        ["mahmudah", "mazmumah", "tercela", "buruk"],
+        0,
+        "Akhlak baik = akhlak mahmudah!",
+      ),
+      q(
+        "Kisah Nabi Musa AS berkaitan dengan mukjizat ...",
+        [
+          "membelah lautan",
+          "menghidupkan orang mati",
+          "berbicara dengan hewan",
+          "membuat api menjadi dingin",
+        ],
+        0,
+        "Nabi Musa membelah Laut Merah!",
+      ),
+      q(
+        "Surat Al-Ikhlas terdiri dari ... ayat.",
+        ["3", "4", "5", "6"],
+        1,
+        "Al-Ikhlas = 4 ayat!",
+      ),
+      q(
+        "Kisah Nabi Ibrahim AS terkenal dengan ...",
+        [
+          "masuk ke dalam api dan selamat",
+          "membelah lautan",
+          "menghidupkan orang mati",
+          "berjalan di atas air",
+        ],
+        0,
+        "Nabi Ibrahim selamat dari api!",
+      ),
+      q(
+        "Sikap sabar termasuk akhlak ...",
+        ["tercela", "mazmumah", "mahmudah/terpuji", "biasa"],
+        2,
+        "Sabar = akhlak terpuji (mahmudah)!",
+      ),
+      q(
+        "Surat Al-Fatihah terdiri dari ... ayat.",
+        ["5", "6", "7", "8"],
+        2,
+        "Al-Fatihah = 7 ayat!",
+      ),
+      q(
+        "Akhlak yang buruk/tercela disebut akhlak ...",
+        ["mahmudah", "karimah", "mazmumah", "mulia"],
+        2,
+        "Akhlak buruk = akhlak mazmumah!",
+      ),
+      q(
+        "Kisah Nabi Yunus AS terkenal dengan ...",
+        [
+          "ditelan ikan paus",
+          "membelah lautan",
+          "selamat dari api",
+          "mengalahkan firaun",
+        ],
+        0,
+        "Nabi Yunus ditelan ikan paus!",
+      ),
+      q(
+        "Jujur adalah contoh akhlak ...",
+        ["mazmumah", "tercela", "mahmudah", "biasa"],
+        2,
+        "Jujur = akhlak mahmudah!",
+      ),
+      q(
+        "Surat An-Nas adalah surat ke ... dalam Al-Quran.",
+        ["112", "113", "114", "115"],
+        2,
+        "An-Nas adalah surat ke-114!",
+      ),
+      q(
+        "Bohong adalah contoh akhlak ...",
+        ["terpuji", "mahmudah", "baik", "mazmumah/tercela"],
+        3,
+        "Bohong = akhlak mazmumah!",
+      ),
+      q(
+        "Kisah Nabi Nuh AS terkenal dengan ...",
+        [
+          "membangun bahtera/perahu besar",
+          "membelah lautan",
+          "selamat dari api",
+          "membuat taman surga",
+        ],
+        0,
+        "Nabi Nuh membangun bahtera besar!",
+      ),
+      q(
+        "Perilaku saling tolong menolong termasuk akhlak ...",
+        ["tercela", "buruk", "mazmumah", "terpuji"],
+        3,
+        "Tolong menolong = akhlak terpuji!",
+      ),
+      q(
+        "Surat Al-Falaq adalah surat ke ... dalam Al-Quran.",
+        ["112", "113", "114", "111"],
+        1,
+        "Al-Falaq adalah surat ke-113!",
+      ),
+    ],
+    bing: [
+      q(
+        "What is the English word for 'pensil'?",
+        ["Pen", "Pencil", "Book", "Ruler"],
+        1,
+        "Pensil = Pencil!",
+      ),
+      q(
+        "What do you use every day at school? (Apa yang dipakai setiap hari di sekolah?)",
+        ["Pillow", "Bag", "Bed", "Sofa"],
+        1,
+        "We use a bag at school!",
+      ),
+      q(
+        "What activity do you do in the morning? (Kegiatan pagi hari)",
+        [
+          "Sleep",
+          "Eat dinner",
+          "Wake up and have breakfast",
+          "Watch TV at night",
+        ],
+        2,
+        "Morning activity: wake up and have breakfast!",
+      ),
+      q(
+        "'I go to school every day.' What tense is this?",
+        ["Past tense", "Present tense", "Future tense", "Perfect tense"],
+        1,
+        "I go = present tense!",
+      ),
+      q(
+        "What is the English word for 'papan tulis'?",
+        ["Table", "Chair", "Blackboard", "Window"],
+        2,
+        "Papan tulis = Blackboard!",
+      ),
+      q(
+        "What do students do at school?",
+        ["Sleep", "Study", "Cook", "Garden"],
+        1,
+        "Students study at school!",
+      ),
+      q(
+        "Which word means 'teman'?",
+        ["Enemy", "Teacher", "Friend", "Parent"],
+        2,
+        "Teman = Friend!",
+      ),
+      q(
+        "'She reads a book.' The subject is ...",
+        ["reads", "book", "a", "She"],
+        3,
+        "The subject is 'She'!",
+      ),
+      q(
+        "What is the English word for 'penggaris'?",
+        ["Eraser", "Ruler", "Pencil", "Book"],
+        1,
+        "Penggaris = Ruler!",
+      ),
+      q(
+        "What time do most students wake up? (Jam berapa siswa bangun)",
+        ["12 o'clock at night", "In the morning", "At midnight", "At noon"],
+        1,
+        "Students wake up in the morning!",
+      ),
+      q(
+        "Which word is a school object?",
+        ["Car", "Tree", "Dictionary", "Mountain"],
+        2,
+        "Dictionary is a school object!",
+      ),
+      q(
+        "'They play football.' How many subjects?",
+        ["One", "Two", "Three", "More than one (they)"],
+        3,
+        "'They' = more than one subject!",
+      ),
+      q(
+        "What is 'buku tulis' in English?",
+        ["Textbook", "Notebook", "Storybook", "Comic book"],
+        1,
+        "Buku tulis = Notebook!",
+      ),
+      q(
+        "What activity do you do at night before bed?",
+        [
+          "Go to school",
+          "Brush teeth and sleep",
+          "Play football",
+          "Go to market",
+        ],
+        1,
+        "Before bed: brush teeth and sleep!",
+      ),
+      q(
+        "Which word means 'belajar'?",
+        ["Play", "Eat", "Study", "Sleep"],
+        2,
+        "Belajar = Study!",
+      ),
+    ],
+  },
+
+  /* ══════════════════════════════════════════════════════════
+     KELAS 4
+  ══════════════════════════════════════════════════════════ */
+  4: {
+    bindo: [
+      q(
+        "Ide pokok suatu teks disebut juga ...",
+        ["kalimat penjelas", "gagasan utama", "kesimpulan", "judul"],
+        1,
+        "Ide pokok = gagasan utama!",
+      ),
+      q(
+        "Paragraf yang ide pokoknya di awal disebut paragraf ...",
+        ["induktif", "deduktif", "campuran", "narasi"],
+        1,
+        "Ide pokok di awal = paragraf deduktif!",
+      ),
+      q(
+        "Kosakata baku adalah kata yang sesuai dengan ...",
+        [
+          "ejaan yang salah",
+          "KBBI (Kamus Besar Bahasa Indonesia)",
+          "bahasa daerah",
+          "bahasa asing",
+        ],
+        1,
+        "Kosakata baku sesuai KBBI!",
+      ),
+      q(
+        "Kata tidak baku dari 'fotokopi' adalah ...",
+        ["photocopy", "foto kopi", "photo copy", "fothokopy"],
+        0,
+        "Fotokopi adalah baku, photocopy tidak baku!",
+      ),
+      q(
+        "Ide pokok paragraf dapat ditemukan dengan cara ...",
+        [
+          "membaca judul saja",
+          "membaca kalimat pertama saja",
+          "membaca keseluruhan teks",
+          "menghafal teks",
+        ],
+        2,
+        "Temukan ide pokok dengan membaca keseluruhan!",
+      ),
+      q(
+        "Teks yang berisi pandangan penulis tentang suatu masalah disebut ...",
+        ["teks narasi", "teks eksposisi", "teks argumentasi", "teks deskripsi"],
+        2,
+        "Pandangan penulis = teks argumentasi!",
+      ),
+      q(
+        "Contoh kosakata baku yang benar adalah ...",
+        ["ijin", "aktip", "apotek", "nasehat"],
+        2,
+        "Apotek adalah penulisan baku!",
+      ),
+      q(
+        "Kalimat penjelas berfungsi untuk ...",
+        [
+          "menjadi ide utama",
+          "menjelaskan ide pokok",
+          "menutup paragraf",
+          "memberi judul",
+        ],
+        1,
+        "Kalimat penjelas = menjelaskan ide pokok!",
+      ),
+      q(
+        "Paragraf yang ide pokoknya di akhir disebut paragraf ...",
+        ["deduktif", "induktif", "campuran", "deskriptif"],
+        1,
+        "Ide pokok di akhir = paragraf induktif!",
+      ),
+      q(
+        "Kata 'aktif' yang tidak baku ditulis ...",
+        ["aktif", "aktip", "active", "aktive"],
+        1,
+        "Aktip adalah penulisan tidak baku!",
+      ),
+      q(
+        "Teks narasi adalah teks yang ...",
+        [
+          "menceritakan urutan kejadian",
+          "menjelaskan cara membuat sesuatu",
+          "berisi data dan fakta",
+          "memberi petunjuk",
+        ],
+        0,
+        "Narasi = menceritakan urutan kejadian!",
+      ),
+      q(
+        "Contoh kosakata tidak baku adalah ...",
+        ["November", "apotek", "ijazah", "nasehat"],
+        3,
+        "Nasehat tidak baku, yang baku: nasihat!",
+      ),
+      q(
+        "Merangkum bacaan berarti ...",
+        [
+          "menyalin seluruh teks",
+          "mengambil poin-poin penting",
+          "menghafal teks",
+          "membuat teks baru",
+        ],
+        1,
+        "Merangkum = mengambil poin penting!",
+      ),
+      q(
+        "Teks deskripsi adalah teks yang ...",
+        [
+          "menceritakan peristiwa",
+          "menggambarkan suatu objek dengan detail",
+          "berisi pendapat",
+          "memberi petunjuk",
+        ],
+        1,
+        "Deskripsi = menggambarkan objek secara detail!",
+      ),
+      q(
+        "Sinonim kata 'terkenal' adalah ...",
+        ["asing", "biasa", "populer", "tersembunyi"],
+        2,
+        "Sinonim terkenal = populer!",
+      ),
+    ],
+    mtk: [
+      q(
+        "Berapakah 3/4 + 1/4?",
+        ["1/2", "4/8", "1 (satu)", "3/8"],
+        2,
+        "3/4 + 1/4 = 4/4 = 1!",
+      ),
+      q(
+        "Keliling persegi panjang 8 cm × 5 cm adalah ...",
+        ["26 cm", "28 cm", "30 cm", "40 cm"],
+        0,
+        "K = 2 × (8+5) = 2 × 13 = 26 cm!",
+      ),
+      q(
+        "Luas persegi panjang 10 cm × 6 cm adalah ...",
+        ["32 cm²", "60 cm²", "16 cm²", "80 cm²"],
+        1,
+        "L = 10 × 6 = 60 cm²!",
+      ),
+      q(
+        "Berapakah 3/5 - 1/5?",
+        ["2/10", "2/5", "1/5", "4/5"],
+        1,
+        "3/5 - 1/5 = 2/5!",
+      ),
+      q(
+        "Sudut siku-siku besarnya ...",
+        ["45°", "60°", "90°", "180°"],
+        2,
+        "Sudut siku-siku = 90°!",
+      ),
+      q(
+        "Luas segitiga dengan alas 10 cm dan tinggi 8 cm adalah ...",
+        ["40 cm²", "80 cm²", "18 cm²", "20 cm²"],
+        0,
+        "L = 1/2 × 10 × 8 = 40 cm²!",
+      ),
+      q("1/2 × 3/4 = ...", ["4/6", "3/8", "2/6", "1/3"], 1, "1/2 × 3/4 = 3/8!"),
+      q(
+        "Keliling segitiga dengan sisi 6, 8, dan 10 cm adalah ...",
+        ["20 cm", "22 cm", "24 cm", "26 cm"],
+        2,
+        "K = 6 + 8 + 10 = 24 cm!",
+      ),
+      q(
+        "Berapakah 2/3 + 1/6?",
+        ["3/9", "5/6", "3/6", "1/2"],
+        1,
+        "2/3 = 4/6, lalu 4/6 + 1/6 = 5/6!",
+      ),
+      q(
+        "Sudut lancip besarnya ...",
+        [
+          "lebih dari 90°",
+          "sama dengan 90°",
+          "lebih dari 180°",
+          "kurang dari 90°",
+        ],
+        3,
+        "Sudut lancip < 90°!",
+      ),
+      q(
+        "Luas trapesium dengan alas sejajar 10 dan 6 cm, tinggi 4 cm adalah ...",
+        ["32 cm²", "40 cm²", "48 cm²", "64 cm²"],
+        0,
+        "L = 1/2 × (10+6) × 4 = 32 cm²!",
+      ),
+      q(
+        "Berapakah 5/6 - 1/3?",
+        ["4/3", "1/2", "4/6", "3/6"],
+        1,
+        "1/3 = 2/6, lalu 5/6 - 2/6 = 3/6 = 1/2!",
+      ),
+      q(
+        "Perimeter (keliling) lingkaran dengan jari-jari 7 cm (π=22/7) adalah ...",
+        ["44 cm", "22 cm", "154 cm", "88 cm"],
+        0,
+        "K = 2 × 22/7 × 7 = 44 cm!",
+      ),
+      q(
+        "Sudut tumpul besarnya ...",
+        [
+          "kurang dari 90°",
+          "sama dengan 90°",
+          "antara 90° dan 180°",
+          "sama dengan 180°",
+        ],
+        2,
+        "Sudut tumpul antara 90° dan 180°!",
+      ),
+      q(
+        "Berapakah 3/4 × 2/3?",
+        ["5/7", "6/12", "1/2", "5/12"],
+        2,
+        "3/4 × 2/3 = 6/12 = 1/2!",
+      ),
+    ],
+    ipa: [
+      q(
+        "Gaya yang terjadi saat menarik atau mendorong benda disebut gaya ...",
+        ["gravitasi", "gesek", "otot", "magnet"],
+        2,
+        "Menarik/mendorong menggunakan gaya otot!",
+      ),
+      q(
+        "Energi yang tersimpan dalam baterai adalah energi ...",
+        ["cahaya", "panas", "kimia", "bunyi"],
+        2,
+        "Baterai menyimpan energi kimia!",
+      ),
+      q(
+        "Organ yang memompa darah ke seluruh tubuh adalah ...",
+        ["paru-paru", "ginjal", "jantung", "hati"],
+        2,
+        "Jantung memompa darah!",
+      ),
+      q(
+        "Gaya gravitasi bumi menyebabkan benda ...",
+        ["melayang", "jatuh ke bawah", "berputar", "bercahaya"],
+        1,
+        "Gravitasi menyebabkan benda jatuh ke bawah!",
+      ),
+      q(
+        "Energi panas matahari dapat diubah menjadi energi listrik oleh ...",
+        ["kincir angin", "panel surya", "generator", "baterai"],
+        1,
+        "Panel surya mengubah energi matahari menjadi listrik!",
+      ),
+      q(
+        "Organ pencernaan yang pertama memproses makanan adalah ...",
+        ["lambung", "usus", "mulut", "kerongkongan"],
+        2,
+        "Pencernaan pertama terjadi di mulut!",
+      ),
+      q(
+        "Gaya yang menghambat gerakan benda disebut gaya ...",
+        ["gravitasi", "magnet", "gesek", "pegas"],
+        2,
+        "Gaya yang menghambat = gaya gesek!",
+      ),
+      q(
+        "Energi bunyi dihasilkan dari benda yang ...",
+        ["diam", "bergetar", "bercahaya", "panas"],
+        1,
+        "Energi bunyi dari benda yang bergetar!",
+      ),
+      q(
+        "Organ yang berfungsi menyaring darah adalah ...",
+        ["jantung", "paru-paru", "ginjal", "usus"],
+        2,
+        "Ginjal menyaring darah!",
+      ),
+      q(
+        "Magnet menarik benda yang terbuat dari ...",
+        ["plastik", "kayu", "kaca", "besi/baja"],
+        3,
+        "Magnet menarik benda dari besi/baja!",
+      ),
+      q(
+        "Energi listrik dapat diubah menjadi energi cahaya oleh ...",
+        ["baterai", "lampu", "kipas angin", "speaker"],
+        1,
+        "Lampu mengubah listrik menjadi cahaya!",
+      ),
+      q(
+        "Organ yang berfungsi dalam pernapasan adalah ...",
+        ["jantung", "ginjal", "paru-paru", "usus"],
+        2,
+        "Paru-paru untuk bernapas!",
+      ),
+      q(
+        "Kutub magnet yang sama jika didekatkan akan ...",
+        ["tarik menarik", "tolak menolak", "diam", "menyatu"],
+        1,
+        "Kutub sama = tolak menolak!",
+      ),
+      q(
+        "Energi kinetik adalah energi yang dimiliki benda yang ...",
+        ["diam", "bergerak", "panas", "bercahaya"],
+        1,
+        "Energi kinetik = energi gerak!",
+      ),
+      q(
+        "Pembuluh darah yang membawa darah dari jantung ke seluruh tubuh adalah ...",
+        ["vena", "arteri", "kapiler", "limfe"],
+        1,
+        "Arteri membawa darah dari jantung!",
+      ),
+    ],
+    ips: [
+      q(
+        "Keragaman budaya Indonesia adalah kekayaan yang harus ...",
+        [
+          "dipecah belah",
+          "dipertentangkan",
+          "dijaga dan dilestarikan",
+          "diabaikan",
+        ],
+        2,
+        "Keragaman budaya harus dijaga dan dilestarikan!",
+      ),
+      q(
+        "Peta Indonesia menunjukkan bahwa Indonesia adalah negara ...",
+        ["kepulauan", "satu pulau saja", "di kutub", "tanpa lautan"],
+        0,
+        "Indonesia adalah negara kepulauan!",
+      ),
+      q(
+        "SDA (Sumber Daya Alam) yang digunakan untuk bahan bakar adalah ...",
+        ["batu", "pasir", "minyak bumi", "tanah liat"],
+        2,
+        "Minyak bumi untuk bahan bakar!",
+      ),
+      q(
+        "Tarian adat dari Jawa Tengah adalah ...",
+        ["Tari Saman", "Tari Serimpi", "Tari Kecak", "Tari Tor-tor"],
+        1,
+        "Tari Serimpi dari Jawa Tengah!",
+      ),
+      q(
+        "Pulau terbesar di Indonesia adalah ...",
+        ["Jawa", "Sumatra", "Sulawesi", "Kalimantan"],
+        3,
+        "Kalimantan adalah pulau terbesar di Indonesia!",
+      ),
+      q(
+        "SDA yang berasal dari laut adalah ...",
+        ["batu bara", "minyak bumi", "ikan dan hasil laut", "emas"],
+        2,
+        "Dari laut: ikan dan hasil laut!",
+      ),
+      q(
+        "Rumah adat dari Minangkabau adalah ...",
+        ["Joglo", "Rumah Gadang", "Tongkonan", "Honai"],
+        1,
+        "Rumah Gadang dari Minangkabau!",
+      ),
+      q(
+        "Bahasa resmi di Indonesia adalah ...",
+        ["Bahasa Jawa", "Bahasa Inggris", "Bahasa Indonesia", "Bahasa Sunda"],
+        2,
+        "Bahasa resmi Indonesia = Bahasa Indonesia!",
+      ),
+      q(
+        "SDA hutan tropis Indonesia kaya akan ...",
+        ["es dan salju", "keanekaragaman hayati", "pasir gurun", "gletser"],
+        1,
+        "Hutan tropis kaya keanekaragaman hayati!",
+      ),
+      q(
+        "Pakaian adat dari Jawa adalah ...",
+        ["Ulos", "Baju Bodo", "Kebaya", "Koteka"],
+        2,
+        "Kebaya adalah pakaian adat Jawa!",
+      ),
+      q(
+        "Jumlah pulau di Indonesia sekitar ...",
+        ["1.000", "5.000", "17.000", "50.000"],
+        2,
+        "Indonesia punya sekitar 17.000 pulau!",
+      ),
+      q(
+        "Kegiatan menjaga lingkungan adalah ...",
+        [
+          "membuang sampah di sungai",
+          "menebang pohon sembarangan",
+          "menanam pohon",
+          "membakar sampah",
+        ],
+        2,
+        "Menjaga lingkungan dengan menanam pohon!",
+      ),
+      q(
+        "Senjata tradisional dari Sulawesi Selatan adalah ...",
+        ["Rencong", "Badik", "Mandau", "Keris"],
+        1,
+        "Badik adalah senjata dari Sulawesi Selatan!",
+      ),
+      q(
+        "Letak geografis Indonesia yang strategis karena berada di ...",
+        [
+          "dua samudra dan dua benua",
+          "di tengah Eropa",
+          "dekat kutub utara",
+          "di padang gurun",
+        ],
+        0,
+        "Indonesia di dua samudra dan dua benua!",
+      ),
+      q(
+        "SDA yang dapat diperbarui adalah ...",
+        ["batu bara", "minyak bumi", "gas alam", "air dan hutan"],
+        3,
+        "Air dan hutan adalah SDA terbarukan!",
+      ),
+    ],
+    pai: [
+      q(
+        "Hukum bacaan nun mati atau tanwin yang dibaca dengung disebut ...",
+        ["ikhfa", "iqlab", "idgham bighunnah", "izhar"],
+        2,
+        "Dengung = idgham bighunnah!",
+      ),
+      q(
+        "Hukum tajwid ketika nun mati bertemu huruf halqi dibaca ...",
+        ["dengung", "jelas (izhar)", "samar", "lebur"],
+        1,
+        "Bertemu huruf halqi = izhar (jelas)!",
+      ),
+      q(
+        "Shalat Jumat wajib bagi ...",
+        [
+          "semua orang",
+          "laki-laki muslim yang baligh",
+          "perempuan saja",
+          "anak-anak saja",
+        ],
+        1,
+        "Shalat Jumat wajib bagi laki-laki muslim baligh!",
+      ),
+      q(
+        "Ibadah yang dilakukan sebulan penuh di bulan Ramadan adalah ...",
+        ["haji", "zakat", "puasa", "shalat Id"],
+        2,
+        "Puasa sebulan di bulan Ramadan!",
+      ),
+      q(
+        "Hukum bacaan mim mati bertemu mim disebut ...",
+        ["ikhfa syafawi", "idgham mimi", "izhar syafawi", "iqlab"],
+        1,
+        "Mim mati + mim = idgham mimi!",
+      ),
+      q(
+        "Shalat yang dikerjakan setahun sekali pada hari raya Idul Fitri adalah shalat ...",
+        ["Jumat", "Tahajud", "Id (Ied)", "Dhuha"],
+        2,
+        "Shalat Idul Fitri = shalat Id!",
+      ),
+      q(
+        "Zakat fitrah dikeluarkan pada bulan ...",
+        ["Syawal", "Dzulhijjah", "Ramadan", "Muharram"],
+        2,
+        "Zakat fitrah di bulan Ramadan!",
+      ),
+      q(
+        "Bacaan 'Allahuakbar' dalam shalat disebut ...",
+        ["takbir", "tasbih", "tahmid", "tahlil"],
+        0,
+        "Allahu Akbar = takbir!",
+      ),
+      q(
+        "Hukum bacaan ketika nun mati bertemu huruf ikhfa dibaca ...",
+        ["jelas", "lebur", "dengung", "samar-samar"],
+        3,
+        "Ikhfa = samar-samar!",
+      ),
+      q(
+        "Ibadah haji dilaksanakan di kota ...",
+        ["Madinah", "Jakarta", "Mekah", "Baghdad"],
+        2,
+        "Haji dilaksanakan di Mekah!",
+      ),
+      q(
+        "Doa qunut dibaca pada shalat ...",
+        ["Dzuhur", "Ashar", "Subuh", "Isya"],
+        2,
+        "Doa qunut pada shalat Subuh!",
+      ),
+      q(
+        "Surat yang berisi tentang keesaan Allah adalah ...",
+        ["Al-Fatihah", "Al-Ikhlas", "Al-Falaq", "An-Nas"],
+        1,
+        "Al-Ikhlas tentang keesaan Allah!",
+      ),
+      q(
+        "Hukum mim mati bertemu selain ba dan mim disebut ...",
+        ["ikhfa syafawi", "idgham mimi", "izhar syafawi", "iqlab"],
+        2,
+        "Mim mati + selain ba/mim = izhar syafawi!",
+      ),
+      q(
+        "Syarat sah shalat antara lain ...",
+        [
+          "pakaian kotor",
+          "suci dari hadats dan najis",
+          "mengantuk",
+          "tergesa-gesa",
+        ],
+        1,
+        "Syarat sah shalat: suci dari hadats dan najis!",
+      ),
+      q(
+        "Membaca Al-Quran harus dengan ...",
+        ["cepat-cepat", "tajwid yang benar", "berbisik saja", "berbaring"],
+        1,
+        "Al-Quran dibaca dengan tajwid yang benar!",
+      ),
+    ],
+    bing: [
+      q(
+        "What is the occupation of someone who flies a plane?",
+        ["Doctor", "Pilot", "Teacher", "Farmer"],
+        1,
+        "The person who flies a plane is a Pilot!",
+      ),
+      q(
+        "'My father works as a doctor.' The occupation is ...",
+        ["Father", "My", "Works", "Doctor"],
+        3,
+        "The occupation is Doctor!",
+      ),
+      q(
+        "What is a 'daily routine'?",
+        [
+          "Things we eat",
+          "Things we do every day",
+          "Things we buy",
+          "Things we dream",
+        ],
+        1,
+        "Daily routine = things we do every day!",
+      ),
+      q(
+        "Which sentence is correct?",
+        [
+          "I am go to school",
+          "She goes to school",
+          "They goes to market",
+          "He go home",
+        ],
+        1,
+        "She goes to school (she/he/it + goes)!",
+      ),
+      q(
+        "What does a teacher do?",
+        ["Sells food", "Teaches students", "Builds houses", "Treats patients"],
+        1,
+        "A teacher teaches students!",
+      ),
+      q(
+        "'Every morning, I wake up at 5 AM.' When does this happen?",
+        ["At noon", "In the evening", "In the morning", "At night"],
+        2,
+        "5 AM = in the morning!",
+      ),
+      q(
+        "What is the occupation of someone who grows rice?",
+        ["Fisherman", "Teacher", "Farmer", "Engineer"],
+        2,
+        "Grows rice = Farmer!",
+      ),
+      q(
+        "Which is correct for 'He ... to school every day.'?",
+        ["go", "goes", "going", "gone"],
+        1,
+        "He goes (third person singular)!",
+      ),
+      q(
+        "What does a doctor do?",
+        [
+          "Teaches students",
+          "Treats sick people",
+          "Sells medicine",
+          "Cooks food",
+        ],
+        1,
+        "Doctor treats sick people!",
+      ),
+      q(
+        "'She wakes up, brushes teeth, and eats breakfast.' This is her ...",
+        ["hobby", "talent", "daily routine", "subject"],
+        2,
+        "This is her daily routine!",
+      ),
+      q(
+        "Who fixes cars?",
+        ["Doctor", "Mechanic", "Pilot", "Farmer"],
+        1,
+        "A mechanic fixes cars!",
+      ),
+      q(
+        "'They ... football every afternoon.' Fill in the blank.",
+        ["plays", "is play", "play", "playing"],
+        2,
+        "They play (plural = no 's')!",
+      ),
+      q(
+        "What does a chef do?",
+        ["Teaches", "Cooks food", "Flies planes", "Treats patients"],
+        1,
+        "A chef cooks food!",
+      ),
+      q(
+        "Which describes a family member?",
+        ["Dog", "Car", "Mother", "House"],
+        2,
+        "Mother is a family member!",
+      ),
+      q(
+        "'I ... my homework every evening.' Correct form:",
+        ["does", "do", "doing", "done"],
+        1,
+        "I do (first person)!",
+      ),
+    ],
+  },
+
+  /* ══════════════════════════════════════════════════════════
+     KELAS 5
+  ══════════════════════════════════════════════════════════ */
+  5: {
+    bindo: [
+      q(
+        "Teks narasi adalah teks yang bertujuan ...",
+        [
+          "menjelaskan cara",
+          "menceritakan urutan peristiwa",
+          "meyakinkan pembaca",
+          "menggambarkan objek",
+        ],
+        1,
+        "Narasi = menceritakan urutan peristiwa!",
+      ),
+      q(
+        "Cara meringkas teks yang benar adalah ...",
+        [
+          "menyalin semua isi",
+          "menulis ulang dengan kata sendiri dan poin penting",
+          "menghapus semua kalimat",
+          "mengubah isi teks",
+        ],
+        1,
+        "Meringkas = tulis poin penting dengan kata sendiri!",
+      ),
+      q(
+        "Informasi penting dalam teks dapat diidentifikasi dengan kata tanya ...",
+        [
+          "siapa, apa, di mana, kapan, mengapa, bagaimana (5W+1H)",
+          "hanya 'apa'",
+          "hanya 'siapa'",
+          "tidak ada cara",
+        ],
+        0,
+        "Informasi penting: 5W+1H!",
+      ),
+      q(
+        "Teks persuasi bertujuan untuk ...",
+        [
+          "menceritakan kisah",
+          "meyakinkan/membujuk pembaca",
+          "menjelaskan cara",
+          "menggambarkan tempat",
+        ],
+        1,
+        "Persuasi = meyakinkan/membujuk pembaca!",
+      ),
+      q(
+        "Alur cerita yang berjalan dari awal ke akhir disebut alur ...",
+        ["mundur", "campuran", "maju", "flashback"],
+        2,
+        "Alur maju = dari awal ke akhir!",
+      ),
+      q(
+        "Latar dalam sebuah cerita meliputi ...",
+        [
+          "tokoh dan penokohan",
+          "waktu, tempat, dan suasana",
+          "konflik dan solusi",
+          "tema dan amanat",
+        ],
+        1,
+        "Latar: waktu, tempat, suasana!",
+      ),
+      q(
+        "Amanat adalah ...",
+        [
+          "konflik dalam cerita",
+          "pesan moral yang ingin disampaikan",
+          "nama tokoh utama",
+          "judul cerita",
+        ],
+        1,
+        "Amanat = pesan moral cerita!",
+      ),
+      q(
+        "Kalimat aktif adalah kalimat di mana subjeknya ...",
+        [
+          "dikenai perbuatan",
+          "melakukan perbuatan",
+          "tidak melakukan apapun",
+          "menerima hadiah",
+        ],
+        1,
+        "Kalimat aktif: subjek melakukan perbuatan!",
+      ),
+      q(
+        "Ringkasan yang baik harus ...",
+        [
+          "lebih panjang dari teks asli",
+          "sama persis dengan teks asli",
+          "lebih pendek dan mengandung inti",
+          "berisi gambar-gambar",
+        ],
+        2,
+        "Ringkasan: lebih pendek, mengandung inti!",
+      ),
+      q(
+        "Kata 'dimakan' dalam kalimat pasif subjeknya ...",
+        ["makan", "memakan", "dikenai perbuatan (dimakan)", "memberi makan"],
+        2,
+        "Pasif: subjek dikenai perbuatan!",
+      ),
+      q(
+        "Teks eksposisi berisi ...",
+        [
+          "cerita fiksi",
+          "fakta dan penjelasan tentang suatu topik",
+          "pantun dan puisi",
+          "dialog percakapan",
+        ],
+        1,
+        "Eksposisi: fakta dan penjelasan topik!",
+      ),
+      q(
+        "Tema cerita adalah ...",
+        [
+          "nama tokoh",
+          "judul cerita",
+          "inti/pokok masalah yang dibahas",
+          "tempat kejadian",
+        ],
+        2,
+        "Tema = inti/pokok masalah cerita!",
+      ),
+      q(
+        "Konflik dalam cerita adalah ...",
+        [
+          "penyelesaian masalah",
+          "masalah/pertentangan yang terjadi",
+          "perkenalan tokoh",
+          "akhir cerita",
+        ],
+        1,
+        "Konflik = masalah/pertentangan dalam cerita!",
+      ),
+      q(
+        "Cara menentukan informasi penting dari teks adalah dengan ...",
+        [
+          "membaca judul saja",
+          "membaca secara keseluruhan dan mencari poin kunci",
+          "menghitung jumlah kata",
+          "melihat gambar saja",
+        ],
+        1,
+        "Temukan info penting: baca keseluruhan, cari poin kunci!",
+      ),
+      q(
+        "Penggunaan kata hubung 'karena' menunjukkan hubungan ...",
+        ["tujuan", "perlawanan", "sebab akibat", "pilihan"],
+        2,
+        "Karena = hubungan sebab akibat!",
+      ),
+    ],
+    mtk: [
+      q(
+        "Volume kubus dengan sisi 4 cm adalah ...",
+        ["16 cm³", "48 cm³", "64 cm³", "128 cm³"],
+        2,
+        "V = 4³ = 4 × 4 × 4 = 64 cm³!",
+      ),
+      q(
+        "Skala 1:200 berarti 1 cm di peta mewakili ... cm sesungguhnya.",
+        ["2", "20", "200", "2000"],
+        2,
+        "1:200 = 1 cm = 200 cm!",
+      ),
+      q(
+        "Perbandingan 3:5 jika total 40, bagian pertama adalah ...",
+        ["15", "20", "24", "25"],
+        0,
+        "3/(3+5) × 40 = 3/8 × 40 = 15!",
+      ),
+      q(
+        "Volume balok 10 cm × 5 cm × 4 cm adalah ...",
+        ["100 cm³", "150 cm³", "200 cm³", "250 cm³"],
+        2,
+        "V = 10 × 5 × 4 = 200 cm³!",
+      ),
+      q(
+        "Jika skala peta 1:50.000, jarak 3 cm di peta = ... km sesungguhnya.",
+        ["0,15 km", "1,5 km", "15 km", "150 km"],
+        1,
+        "3 × 50.000 = 150.000 cm = 1,5 km!",
+      ),
+      q(
+        "Perbandingan umur Adi dan Budi 2:3, jumlah umur 25 tahun. Umur Adi?",
+        ["10", "12", "15", "8"],
+        0,
+        "2/(2+3) × 25 = 2/5 × 25 = 10!",
+      ),
+      q(
+        "Volume tabung dengan jari-jari 7 cm dan tinggi 10 cm (π=22/7) adalah ...",
+        ["1.320 cm³", "1.540 cm³", "1.760 cm³", "2.200 cm³"],
+        1,
+        "V = 22/7 × 7² × 10 = 1540 cm³!",
+      ),
+      q(
+        "Jika 3/4 bagian = 15, maka nilai utuhnya adalah ...",
+        ["18", "20", "25", "30"],
+        1,
+        "15 ÷ 3/4 = 15 × 4/3 = 20!",
+      ),
+      q(
+        "Skala 1:100.000, jarak sesungguhnya 5 km = ... cm di peta.",
+        ["0,5 cm", "5 cm", "50 cm", "500 cm"],
+        1,
+        "5 km = 500.000 cm, 500.000/100.000 = 5 cm!",
+      ),
+      q(
+        "Volume prisma segitiga dengan alas segitiga 6 cm, tinggi 4 cm, panjang 10 cm adalah ...",
+        ["120 cm³", "240 cm³", "60 cm³", "80 cm³"],
+        0,
+        "V = (1/2 × 6 × 4) × 10 = 120 cm³!",
+      ),
+      q(
+        "Perbandingan 4:6 paling sederhana adalah ...",
+        ["2:3", "3:4", "4:6", "1:2"],
+        0,
+        "4:6 = 2:3!",
+      ),
+      q(
+        "Jika harga 5 buku Rp25.000, harga 8 buku adalah ...",
+        ["Rp35.000", "Rp40.000", "Rp45.000", "Rp50.000"],
+        1,
+        "Rp25.000/5 × 8 = Rp40.000!",
+      ),
+      q(
+        "Volume limas persegi dengan alas 6 cm dan tinggi 4 cm adalah ...",
+        ["48 cm³", "72 cm³", "96 cm³", "144 cm³"],
+        0,
+        "V = 1/3 × 6² × 4 = 48 cm³!",
+      ),
+      q(
+        "Peta skala 1:250.000, jarak kota A ke B = 4 cm. Jarak sesungguhnya?",
+        ["10 km", "100 km", "1000 km", "0,1 km"],
+        0,
+        "4 × 250.000 = 1.000.000 cm = 10 km!",
+      ),
+      q(
+        "Perbandingan permen merah dan biru 5:3, total 40 permen. Biru ada?",
+        ["15", "20", "25", "8"],
+        0,
+        "3/(5+3) × 40 = 15!",
+      ),
+    ],
+    ipa: [
+      q(
+        "Organ pencernaan yang menghasilkan enzim amilase untuk mencerna karbohidrat adalah ...",
+        ["lambung", "usus halus", "mulut (kelenjar ludah)", "pankreas"],
+        2,
+        "Kelenjar ludah di mulut menghasilkan amilase!",
+      ),
+      q(
+        "Ekosistem yang terdiri dari makhluk hidup dan lingkungan abiotiknya disebut ...",
+        ["biosfer", "ekosistem", "habitat", "bioma"],
+        1,
+        "Ekosistem = makhluk hidup + lingkungan abiotik!",
+      ),
+      q(
+        "Perubahan energi pada PLTA (Pembangkit Listrik Tenaga Air) adalah ...",
+        [
+          "kimia → listrik",
+          "gerak/kinetik → listrik",
+          "panas → listrik",
+          "cahaya → listrik",
+        ],
+        1,
+        "PLTA: gerak air → listrik!",
+      ),
+      q(
+        "Organ pencernaan yang menyerap sari-sari makanan adalah ...",
+        ["lambung", "usus besar", "usus halus", "kerongkongan"],
+        2,
+        "Usus halus menyerap sari makanan!",
+      ),
+      q(
+        "Produsen dalam ekosistem adalah ...",
+        ["hewan pemakan daging", "manusia", "tumbuhan hijau", "jamur"],
+        2,
+        "Tumbuhan hijau = produsen!",
+      ),
+      q(
+        "Perubahan energi pada lampu adalah ...",
+        [
+          "kimia → cahaya",
+          "listrik → cahaya",
+          "panas → cahaya",
+          "gerak → cahaya",
+        ],
+        1,
+        "Lampu: listrik → cahaya!",
+      ),
+      q(
+        "Proses penguraian sisa makanan terjadi di ...",
+        ["usus halus", "lambung", "usus besar", "kerongkongan"],
+        2,
+        "Penguraian sisa makanan di usus besar!",
+      ),
+      q(
+        "Konsumen tingkat 1 dalam rantai makanan adalah ...",
+        ["tumbuhan", "herbivora", "karnivora", "omnivora"],
+        1,
+        "Konsumen I = herbivora (pemakan tumbuhan)!",
+      ),
+      q(
+        "Perubahan energi pada sel surya (panel surya) adalah ...",
+        [
+          "panas → listrik",
+          "gerak → listrik",
+          "cahaya → listrik",
+          "kimia → listrik",
+        ],
+        2,
+        "Panel surya: cahaya → listrik!",
+      ),
+      q(
+        "Fungsi hati dalam pencernaan adalah ...",
+        [
+          "menghasilkan enzim pencernaan",
+          "menyerap sari makanan",
+          "menghasilkan cairan empedu",
+          "memompa darah",
+        ],
+        2,
+        "Hati menghasilkan cairan empedu!",
+      ),
+      q(
+        "Pengurai dalam ekosistem adalah ...",
+        ["tumbuhan", "hewan karnivora", "jamur dan bakteri", "herbivora"],
+        2,
+        "Pengurai = jamur dan bakteri!",
+      ),
+      q(
+        "Perubahan energi pada motor listrik adalah ...",
+        [
+          "listrik → gerak",
+          "gerak → listrik",
+          "kimia → gerak",
+          "panas → gerak",
+        ],
+        0,
+        "Motor listrik: listrik → gerak!",
+      ),
+      q(
+        "Sistem pencernaan yang benar adalah ...",
+        [
+          "mulut → lambung → usus → anus",
+          "mulut → kerongkongan → lambung → usus halus → usus besar → anus",
+          "mulut → usus → lambung → anus",
+          "mulut → pankreas → usus → anus",
+        ],
+        1,
+        "Alur pencernaan yang benar!",
+      ),
+      q(
+        "Rantai makanan yang benar adalah ...",
+        [
+          "elang → ular → tikus → padi",
+          "padi → tikus → ular → elang",
+          "tikus → padi → ular → elang",
+          "ular → tikus → padi → elang",
+        ],
+        1,
+        "Padi → tikus → ular → elang!",
+      ),
+      q(
+        "Perubahan energi pada bel listrik adalah ...",
+        [
+          "listrik → cahaya",
+          "listrik → bunyi",
+          "listrik → panas",
+          "gerak → listrik",
+        ],
+        1,
+        "Bel listrik: listrik → bunyi!",
+      ),
+    ],
+    ips: [
+      q(
+        "ASEAN (Association of Southeast Asian Nations) didirikan pada tahun ...",
+        ["1965", "1967", "1970", "1975"],
+        1,
+        "ASEAN didirikan 8 Agustus 1967!",
+      ),
+      q(
+        "Proklamasi Kemerdekaan Indonesia dibacakan pada tanggal ...",
+        [
+          "17 Agustus 1944",
+          "17 Agustus 1945",
+          "18 Agustus 1945",
+          "17 September 1945",
+        ],
+        1,
+        "Proklamasi: 17 Agustus 1945!",
+      ),
+      q(
+        "Interaksi sosial adalah ...",
+        [
+          "hubungan antara manusia dengan lingkungan alam",
+          "hubungan timbal balik antar manusia",
+          "hubungan antara hewan dan tumbuhan",
+          "kegiatan ekonomi saja",
+        ],
+        1,
+        "Interaksi sosial = hubungan timbal balik antar manusia!",
+      ),
+      q(
+        "Negara pendiri ASEAN yang terletak di kepulauan adalah ...",
+        ["Thailand", "Vietnam", "Indonesia", "Myanmar"],
+        2,
+        "Indonesia adalah negara kepulauan pendiri ASEAN!",
+      ),
+      q(
+        "Peristiwa yang mendahului proklamasi kemerdekaan Indonesia adalah ...",
+        [
+          "Peristiwa Bandung Lautan Api",
+          "Peristiwa Rengasdengklok",
+          "Pertempuran Surabaya",
+          "Agresi Militer Belanda",
+        ],
+        1,
+        "Sebelum proklamasi: Peristiwa Rengasdengklok!",
+      ),
+      q(
+        "Kerja sama antar negara ASEAN di bidang ekonomi contohnya adalah ...",
+        [
+          "pertukaran pelajar",
+          "MEA (Masyarakat Ekonomi ASEAN)",
+          "festival budaya bersama",
+          "olahraga SEA Games",
+        ],
+        1,
+        "MEA = kerja sama ekonomi ASEAN!",
+      ),
+      q(
+        "Tokoh yang memproklamasikan kemerdekaan Indonesia adalah ...",
+        [
+          "Soekarno dan Hatta",
+          "Soekarno dan Sjahrir",
+          "Hatta dan Tan Malaka",
+          "Soekarno dan Sudirman",
+        ],
+        0,
+        "Proklamasi: Soekarno dan Hatta!",
+      ),
+      q(
+        "Bentuk interaksi sosial yang bersifat positif disebut ...",
+        ["konflik", "kontravensi", "asosiatif", "disosiatif"],
+        2,
+        "Interaksi positif = asosiatif!",
+      ),
+      q(
+        "Sekretariat ASEAN berkedudukan di ...",
+        ["Kuala Lumpur", "Bangkok", "Jakarta", "Manila"],
+        2,
+        "Sekretariat ASEAN di Jakarta!",
+      ),
+      q(
+        "Naskah proklamasi kemerdekaan Indonesia ditulis oleh ...",
+        [
+          "Soekarno, Hatta, dan Ahmad Soebardjo",
+          "Soekarno sendiri",
+          "Hatta sendiri",
+          "Panitia kemerdekaan",
+        ],
+        0,
+        "Naskah proklamasi ditulis Soekarno, Hatta, dan Ahmad Soebardjo!",
+      ),
+      q(
+        "Bentuk interaksi sosial yang negatif/perpecahan disebut ...",
+        ["asosiatif", "akomodasi", "disosiatif", "asimilasi"],
+        2,
+        "Interaksi negatif = disosiatif!",
+      ),
+      q(
+        "SEA Games adalah kerja sama ASEAN di bidang ...",
+        ["ekonomi", "pendidikan", "olahraga", "militer"],
+        2,
+        "SEA Games = kerja sama olahraga!",
+      ),
+      q(
+        "UUD 1945 ditetapkan sebagai konstitusi Indonesia pada tanggal ...",
+        [
+          "17 Agustus 1945",
+          "18 Agustus 1945",
+          "19 Agustus 1945",
+          "20 Agustus 1945",
+        ],
+        1,
+        "UUD 1945 ditetapkan 18 Agustus 1945!",
+      ),
+      q(
+        "Salah satu negara anggota ASEAN adalah ...",
+        ["Australia", "India", "Thailand", "Jepang"],
+        2,
+        "Thailand adalah anggota ASEAN!",
+      ),
+      q(
+        "Kerja sama ASEAN di bidang pendidikan adalah ...",
+        [
+          "SEA Games",
+          "AFTA",
+          "beasiswa pendidikan antar negara",
+          "perdagangan bebas",
+        ],
+        2,
+        "Beasiswa = kerja sama pendidikan ASEAN!",
+      ),
+    ],
+    pai: [
+      q(
+        "Puasa Ramadan wajib bagi orang Islam yang ...",
+        [
+          "masih anak-anak",
+          "sudah baligh dan mampu",
+          "sudah tua saja",
+          "sehat saja",
+        ],
+        1,
+        "Puasa wajib bagi yang baligh dan mampu!",
+      ),
+      q(
+        "Zakat yang dikeluarkan dari penghasilan/harta disebut zakat ...",
+        ["fitrah", "mal", "profesi", "emas"],
+        1,
+        "Zakat dari harta = zakat mal!",
+      ),
+      q(
+        "Hikmah puasa di antaranya adalah ...",
+        [
+          "menjadi lemah",
+          "melatih kesabaran dan kepedulian",
+          "hanya menahan lapar",
+          "tidak ada hikmah",
+        ],
+        1,
+        "Hikmah puasa: melatih kesabaran!",
+      ),
+      q(
+        "Nabi yang membuat ka'bah adalah ...",
+        ["Nabi Muhammad", "Nabi Musa", "Nabi Ibrahim", "Nabi Isa"],
+        2,
+        "Ka'bah dibangun Nabi Ibrahim!",
+      ),
+      q(
+        "Nisab zakat emas adalah ... gram.",
+        ["85", "90", "100", "50"],
+        0,
+        "Nisab zakat emas = 85 gram!",
+      ),
+      q(
+        "Rasul yang menerima mukjizat bisa berbicara dengan hewan adalah ...",
+        ["Nabi Musa", "Nabi Isa", "Nabi Sulaiman", "Nabi Daud"],
+        2,
+        "Nabi Sulaiman bisa berbicara dengan hewan!",
+      ),
+      q(
+        "Amalan yang pahalanya terus mengalir meski sudah meninggal disebut ...",
+        ["shadaqah biasa", "zakat fitrah", "jariyah", "infak"],
+        2,
+        "Amalan mengalir terus = shadaqah jariyah!",
+      ),
+      q(
+        "I'tikaf adalah ...",
+        [
+          "berpuasa di luar Ramadan",
+          "berdiam diri di masjid untuk beribadah",
+          "memberi makan orang miskin",
+          "membayar zakat",
+        ],
+        1,
+        "I'tikaf = berdiam di masjid untuk ibadah!",
+      ),
+      q(
+        "Kisah Rasul yang terkenal dengan ketabahannya adalah ...",
+        ["Nabi Ibrahim", "Nabi Ayyub", "Nabi Musa", "Nabi Yunus"],
+        1,
+        "Nabi Ayyub terkenal dengan ketabahannya!",
+      ),
+      q(
+        "Zakat fitrah dikeluarkan sebesar ...",
+        [
+          "1 kg beras",
+          "2,5% dari harta",
+          "2,5 kg makanan pokok",
+          "1 liter minyak",
+        ],
+        2,
+        "Zakat fitrah = 2,5 kg makanan pokok!",
+      ),
+      q(
+        "Nabi yang mendapat mukjizat tongkat berubah menjadi ular adalah ...",
+        ["Nabi Isa", "Nabi Ibrahim", "Nabi Sulaiman", "Nabi Musa"],
+        3,
+        "Nabi Musa: tongkat jadi ular!",
+      ),
+      q(
+        "Lailatul Qadar adalah malam yang lebih baik dari ...",
+        ["satu bulan", "seribu hari", "seribu bulan", "satu tahun"],
+        2,
+        "Lailatul Qadar > seribu bulan!",
+      ),
+      q(
+        "Sifat wajib Rasul yang berarti menyampaikan adalah ...",
+        ["amanah", "siddiq", "tabligh", "fathanah"],
+        2,
+        "Tabligh = menyampaikan!",
+      ),
+      q(
+        "Nabi Muhammad SAW lahir di kota ...",
+        ["Madinah", "Mekah", "Palestina", "Yerusalem"],
+        1,
+        "Nabi Muhammad lahir di Mekah!",
+      ),
+      q(
+        "Wakaf adalah ...",
+        [
+          "menyedekahkan harta untuk kepentingan umum yang bermanfaat",
+          "membayar zakat",
+          "memberi pinjaman",
+          "menabung di bank",
+        ],
+        0,
+        "Wakaf = sedekah harta untuk kepentingan umum!",
+      ),
+    ],
+    bing: [
+      q(
+        "Which sentence uses present tense correctly?",
+        [
+          "She study English",
+          "He studys every day",
+          "They studies hard",
+          "I study English every day",
+        ],
+        3,
+        "I study = present tense correct!",
+      ),
+      q(
+        "What does 'describe' mean?",
+        ["Membeli", "Menggambarkan/menjelaskan", "Berlari", "Menyanyi"],
+        1,
+        "Describe = menggambarkan/menjelaskan!",
+      ),
+      q(
+        "'The cat is ... on the chair.' Correct word:",
+        ["sitting", "sit", "sits", "sat"],
+        0,
+        "Is + sitting = present continuous!",
+      ),
+      q(
+        "Which is a correct description?",
+        [
+          "The ball is big, round, red",
+          "The ball red big",
+          "Big ball red is",
+          "Round the ball is red",
+        ],
+        0,
+        "Correct order: adjective before noun!",
+      ),
+      q(
+        "'I usually ... breakfast at 6 AM.' Correct form:",
+        ["ate", "eat", "eating", "eats"],
+        1,
+        "Usually + eat (present simple)!",
+      ),
+      q(
+        "How do you describe color in English?",
+        [
+          "The car is red",
+          "The car red is",
+          "Red car the is",
+          "Is red the car",
+        ],
+        0,
+        "Correct: The car is red!",
+      ),
+      q(
+        "'She ... TV every evening.' Correct:",
+        ["watch", "watched", "watches", "watching"],
+        2,
+        "She watches (third person + es)!",
+      ),
+      q(
+        "Which adjective describes size?",
+        ["Red", "Tall", "Fast", "Loud"],
+        1,
+        "Tall describes size!",
+      ),
+      q(
+        "'We ... to school by bus.' Correct:",
+        ["goes", "go", "going", "gone"],
+        1,
+        "We go (plural, no 's')!",
+      ),
+      q(
+        "'The flower is beautiful and ...' What can complete this?",
+        ["table", "colorful", "jump", "write"],
+        1,
+        "Colorful is an adjective!",
+      ),
+      q(
+        "Which is present tense?",
+        ["She walked", "He will eat", "They play football", "I was sleeping"],
+        2,
+        "They play = present tense!",
+      ),
+      q(
+        "How do you say 'Bukunya tebal'?",
+        [
+          "The book thin is",
+          "The book is thick",
+          "Thick the book",
+          "Is the book thick",
+        ],
+        1,
+        "The book is thick!",
+      ),
+      q(
+        "'He ... English very well.' Correct:",
+        ["speak", "speaks", "speaking", "spoke"],
+        1,
+        "He speaks (third person)!",
+      ),
+      q(
+        "Which sentence describes an object correctly?",
+        [
+          "My bag is big and blue",
+          "Big blue is my bag",
+          "My bag big blue is",
+          "Is my bag big blue",
+        ],
+        0,
+        "Subject + is + adjectives!",
+      ),
+      q(
+        "'They ... homework every night.' Correct:",
+        ["does", "do", "did", "doing"],
+        1,
+        "They do (plural)!",
+      ),
+    ],
+  },
+
+  /* ══════════════════════════════════════════════════════════
+     KELAS 6
+  ══════════════════════════════════════════════════════════ */
+  6: {
+    bindo: [
+      q(
+        "Kesimpulan teks yang baik harus ...",
+        [
+          "sama persis dengan kalimat terakhir",
+          "memuat inti dari seluruh isi teks",
+          "lebih panjang dari teks asli",
+          "berisi opini pribadi saja",
+        ],
+        1,
+        "Kesimpulan = inti dari seluruh isi teks!",
+      ),
+      q(
+        "Kata baku yang benar adalah ...",
+        ["apotik", "ijin", "aktif", "nopember"],
+        2,
+        "Aktif adalah kata baku!",
+      ),
+      q(
+        "Teks eksplanasi berisi ...",
+        [
+          "cerita fiksi",
+          "pantun",
+          "penjelasan proses terjadinya suatu fenomena",
+          "dialog antar tokoh",
+        ],
+        2,
+        "Eksplanasi = penjelasan proses fenomena!",
+      ),
+      q(
+        "Struktur teks eksplanasi yang benar adalah ...",
+        [
+          "orientasi, komplikasi, resolusi",
+          "pernyataan umum, deretan penjelas, interpretasi",
+          "judul, isi, penutup",
+          "pengenalan, konflik, penyelesaian",
+        ],
+        1,
+        "Struktur eksplanasi: pernyataan umum, penjelas, interpretasi!",
+      ),
+      q(
+        "Makna kata 'kontroversial' adalah ...",
+        [
+          "sederhana",
+          "tidak jelas",
+          "menimbulkan perdebatan",
+          "sangat populer",
+        ],
+        2,
+        "Kontroversial = menimbulkan perdebatan!",
+      ),
+      q(
+        "Simpulan berbeda dengan rangkuman karena simpulan ...",
+        [
+          "lebih panjang",
+          "berisi pendapat/penilaian dari isi teks",
+          "menyalin semua isi",
+          "berisi gambar",
+        ],
+        1,
+        "Simpulan = pendapat/penilaian dari isi teks!",
+      ),
+      q(
+        "Teks argumentasi bertujuan untuk ...",
+        [
+          "menghibur pembaca",
+          "menjelaskan proses",
+          "meyakinkan pembaca dengan alasan logis",
+          "menceritakan kisah",
+        ],
+        2,
+        "Argumentasi = meyakinkan dengan alasan logis!",
+      ),
+      q(
+        "Kata 'menegakkan' berasal dari kata dasar ...",
+        ["tegak", "mene", "akan", "negak"],
+        0,
+        "Kata dasar menegakkan = tegak!",
+      ),
+      q(
+        "Penulisan kata serapan yang benar adalah ...",
+        ["sistim", "tehnik", "jadwal", "aktifitas"],
+        2,
+        "Jadwal adalah penulisan yang benar!",
+      ),
+      q(
+        "Topik adalah ...",
+        [
+          "judul karangan",
+          "inti permasalahan yang dibahas dalam teks",
+          "nama pengarang",
+          "tempat kejadian",
+        ],
+        1,
+        "Topik = inti permasalahan dalam teks!",
+      ),
+      q(
+        "Teks laporan berisi ...",
+        [
+          "cerita khayal",
+          "hasil pengamatan/penelitian secara objektif",
+          "pendapat subjektif",
+          "pantun dan puisi",
+        ],
+        1,
+        "Laporan = hasil pengamatan secara objektif!",
+      ),
+      q(
+        "Sinonim kata 'bijaksana' adalah ...",
+        ["bodoh", "arif", "nakal", "serakah"],
+        1,
+        "Sinonim bijaksana = arif!",
+      ),
+      q(
+        "Cara mengidentifikasi informasi tersurat adalah ...",
+        [
+          "mencari makna tersirat",
+          "menemukan informasi yang dinyatakan langsung dalam teks",
+          "membuat simpulan",
+          "memberi pendapat",
+        ],
+        1,
+        "Tersurat = informasi langsung dalam teks!",
+      ),
+      q(
+        "Penggunaan tanda titik dua (:) yang benar adalah ...",
+        [
+          "di akhir kalimat pernyataan",
+          "sebelum rincian atau kutipan",
+          "setelah koma",
+          "di awal kalimat",
+        ],
+        1,
+        "Titik dua sebelum rincian atau kutipan!",
+      ),
+      q(
+        "Kata berimbuhan 'pemberitahuan' bentuk dasarnya adalah ...",
+        ["beritahu", "pemberitahu", "berita", "tahu"],
+        0,
+        "Kata dasar pemberitahuan = beritahu!",
+      ),
+    ],
+    mtk: [
+      q(
+        "Berapakah 25% dari 200?",
+        ["25", "50", "75", "100"],
+        1,
+        "25% × 200 = 50!",
+      ),
+      q(
+        "Debit aliran air 3 liter/detik, dalam 1 menit = ... liter.",
+        ["30", "60", "180", "300"],
+        2,
+        "3 × 60 = 180 liter!",
+      ),
+      q(
+        "Volume bola dengan jari-jari 6 cm (π=3,14) adalah ...",
+        ["226,08 cm³", "904,32 cm³", "452,16 cm³", "1.808,64 cm³"],
+        1,
+        "V = 4/3 × π × r³ = 4/3 × 3,14 × 216 ≈ 904,32!",
+      ),
+      q(
+        "Berapakah 40% dari 350?",
+        ["100", "120", "140", "160"],
+        2,
+        "40% × 350 = 140!",
+      ),
+      q(
+        "Volume kerucut dengan jari-jari 7 cm dan tinggi 9 cm (π=22/7) adalah ...",
+        ["462 cm³", "594 cm³", "1.386 cm³", "693 cm³"],
+        0,
+        "V = 1/3 × 22/7 × 49 × 9 = 462 cm³!",
+      ),
+      q(
+        "Jika debit pipa 5 liter/detik, untuk mengisi bak 1500 liter butuh ... detik.",
+        ["200", "250", "300", "350"],
+        2,
+        "1500 ÷ 5 = 300 detik!",
+      ),
+      q(
+        "Berapakah persentase 18 dari 72?",
+        ["20%", "25%", "30%", "35%"],
+        1,
+        "18/72 × 100% = 25%!",
+      ),
+      q(
+        "Volume tabung jari-jari 7 cm, tinggi 20 cm (π=22/7) adalah ...",
+        ["3.080 cm³", "1.540 cm³", "4.400 cm³", "2.200 cm³"],
+        0,
+        "V = 22/7 × 49 × 20 = 3.080!",
+      ),
+      q(
+        "Luas permukaan kubus sisi 5 cm adalah ...",
+        ["25 cm²", "75 cm²", "100 cm²", "150 cm²"],
+        3,
+        "L = 6 × 5² = 6 × 25 = 150 cm²!",
+      ),
+      q(
+        "Berapakah 75% dari 480?",
+        ["300", "340", "360", "400"],
+        2,
+        "75% × 480 = 360!",
+      ),
+      q(
+        "Debit 2 liter/menit = ... ml/detik.",
+        ["12,3", "33,3", "3,33", "20"],
+        1,
+        "2000 ml / 60 detik ≈ 33,3 ml/detik!",
+      ),
+      q(
+        "Berapakah persentase 35 dari 140?",
+        ["20%", "25%", "30%", "35%"],
+        1,
+        "35/140 × 100% = 25%!",
+      ),
+      q(
+        "Volume limas segiempat alas 8 cm × 8 cm, tinggi 9 cm adalah ...",
+        ["192 cm³", "576 cm³", "288 cm³", "384 cm³"],
+        0,
+        "V = 1/3 × 64 × 9 = 192 cm³!",
+      ),
+      q(
+        "Luas permukaan bola jari-jari 7 cm (π=22/7) adalah ...",
+        ["154 cm²", "308 cm²", "616 cm²", "1.232 cm²"],
+        2,
+        "L = 4 × 22/7 × 49 = 616 cm²!",
+      ),
+      q(
+        "Berapakah 60% dari 450?",
+        ["240", "250", "270", "300"],
+        2,
+        "60% × 450 = 270!",
+      ),
+    ],
+    ipa: [
+      q(
+        "Planet terdekat dari matahari adalah ...",
+        ["Bumi", "Venus", "Merkurius", "Mars"],
+        2,
+        "Merkurius paling dekat matahari!",
+      ),
+      q(
+        "Listrik yang mengalir searah disebut listrik ...",
+        ["AC", "DC", "statis", "dinamis"],
+        1,
+        "Searah = DC (Direct Current)!",
+      ),
+      q(
+        "Magnet yang dibuat dari listrik disebut ...",
+        ["magnet permanen", "magnet alam", "elektromagnet", "magnet keras"],
+        2,
+        "Magnet dari listrik = elektromagnet!",
+      ),
+      q(
+        "Tata surya kita terletak di galaksi ...",
+        ["Andromeda", "Triangulum", "Bima Sakti (Milky Way)", "Centaurus A"],
+        2,
+        "Tata surya ada di galaksi Bima Sakti!",
+      ),
+      q(
+        "Arus listrik mengalir dari kutub ... ke kutub ...",
+        [
+          "negatif ke positif",
+          "positif ke negatif",
+          "netral ke positif",
+          "negatif ke netral",
+        ],
+        1,
+        "Arus listrik dari + ke -!",
+      ),
+      q(
+        "Planet yang memiliki cincin indah adalah ...",
+        ["Jupiter", "Saturnus", "Uranus", "Neptunus"],
+        1,
+        "Saturnus memiliki cincin indah!",
+      ),
+      q(
+        "Benda yang dapat menghantarkan listrik disebut ...",
+        ["isolator", "konduktor", "semikonduktor", "kapasitor"],
+        1,
+        "Penghantar listrik = konduktor!",
+      ),
+      q(
+        "Sifat magnet yang benar adalah ...",
+        [
+          "kutub sama tarik menarik",
+          "kutub berlawanan tolak menolak",
+          "kutub sama tolak menolak",
+          "tidak memiliki kutub",
+        ],
+        2,
+        "Kutub sama = tolak menolak!",
+      ),
+      q(
+        "Planet terbesar di tata surya adalah ...",
+        ["Saturnus", "Uranus", "Neptunus", "Jupiter"],
+        3,
+        "Jupiter adalah planet terbesar!",
+      ),
+      q(
+        "Plastik adalah contoh bahan ...",
+        ["konduktor", "semikonduktor", "isolator", "superkonduktor"],
+        2,
+        "Plastik = isolator (tidak menghantarkan listrik)!",
+      ),
+      q(
+        "Gerhana matahari terjadi ketika ...",
+        [
+          "bumi berada di antara bulan dan matahari",
+          "bulan berada di antara bumi dan matahari",
+          "matahari berada di antara bumi dan bulan",
+          "bumi berada di balik matahari",
+        ],
+        1,
+        "Gerhana matahari: bulan di antara bumi dan matahari!",
+      ),
+      q(
+        "Cara membuat elektromagnet adalah dengan ...",
+        [
+          "memanaskan besi",
+          "menggosok besi",
+          "melilitkan kawat berlistrik pada inti besi",
+          "membekukan besi",
+        ],
+        2,
+        "Elektromagnet: kawat berlistrik + inti besi!",
+      ),
+      q(
+        "Revolusi bumi adalah ...",
+        [
+          "perputaran bumi pada porosnya",
+          "pergerakan bumi mengelilingi matahari",
+          "pergerakan bulan mengelilingi bumi",
+          "perputaran matahari",
+        ],
+        1,
+        "Revolusi = bumi mengelilingi matahari!",
+      ),
+      q(
+        "Besi bersifat ...",
+        ["isolator", "konduktor", "semikonduktor", "tidak bisa menghantarkan"],
+        1,
+        "Besi = konduktor!",
+      ),
+      q(
+        "Rotasi bumi menyebabkan ...",
+        [
+          "pergantian musim",
+          "pasang surut air laut",
+          "siang dan malam",
+          "gerhana matahari",
+        ],
+        2,
+        "Rotasi bumi → siang dan malam!",
+      ),
+    ],
+    ips: [
+      q(
+        "Kemerdekaan Indonesia diproklamasikan pada tanggal ...",
+        [
+          "17 Agustus 1944",
+          "17 Agustus 1945",
+          "18 Agustus 1945",
+          "17 September 1945",
+        ],
+        1,
+        "Proklamasi: 17 Agustus 1945!",
+      ),
+      q(
+        "Globalisasi adalah ...",
+        [
+          "proses penyebaran informasi dalam satu kota",
+          "proses mendunianya segala aspek kehidupan",
+          "penutupan batas antar negara",
+          "kegiatan ekspor impor saja",
+        ],
+        1,
+        "Globalisasi = mendunianya segala aspek kehidupan!",
+      ),
+      q(
+        "ASEAN berdiri pada tanggal ...",
+        [
+          "8 Agustus 1965",
+          "8 Agustus 1967",
+          "8 September 1967",
+          "8 Oktober 1967",
+        ],
+        1,
+        "ASEAN berdiri 8 Agustus 1967!",
+      ),
+      q(
+        "Tokoh yang berperan dalam Perang Diponegoro adalah ...",
+        ["Pangeran Diponegoro", "Soekarno", "Hatta", "Sudirman"],
+        0,
+        "Pangeran Diponegoro memimpin perang!",
+      ),
+      q(
+        "Dampak positif globalisasi adalah ...",
+        [
+          "hilangnya budaya lokal",
+          "mudah mengakses informasi dan teknologi",
+          "meningkatnya kejahatan",
+          "kesenjangan ekonomi membesar",
+        ],
+        1,
+        "Globalisasi positif: mudah akses info dan teknologi!",
+      ),
+      q(
+        "Jumlah anggota ASEAN saat ini adalah ...",
+        ["8", "9", "10", "11"],
+        2,
+        "ASEAN punya 10 anggota!",
+      ),
+      q(
+        "Peristiwa Bandung Lautan Api terjadi pada tahun ...",
+        ["1944", "1945", "1946", "1947"],
+        2,
+        "Bandung Lautan Api: 1946!",
+      ),
+      q(
+        "Dampak negatif globalisasi adalah ...",
+        [
+          "kemajuan teknologi",
+          "mudah komunikasi",
+          "masuknya budaya asing yang tidak sesuai nilai",
+          "peningkatan perdagangan",
+        ],
+        2,
+        "Dampak negatif: budaya asing yang tidak sesuai!",
+      ),
+      q(
+        "Negara ASEAN yang ibu kotanya Kuala Lumpur adalah ...",
+        ["Thailand", "Singapura", "Malaysia", "Vietnam"],
+        2,
+        "Kuala Lumpur = ibu kota Malaysia!",
+      ),
+      q(
+        "Pertempuran Surabaya yang heroik terjadi pada tanggal ...",
+        [
+          "10 Oktober 1945",
+          "10 November 1945",
+          "17 Agustus 1945",
+          "18 Agustus 1945",
+        ],
+        1,
+        "Pertempuran Surabaya: 10 November 1945!",
+      ),
+      q(
+        "Cara menyikapi globalisasi yang bijak adalah ...",
+        [
+          "menolak semua hal baru",
+          "menerima semua tanpa filter",
+          "menyaring dan mengambil yang positif",
+          "menutup diri dari dunia luar",
+        ],
+        2,
+        "Bijak globalisasi: saring dan ambil yang positif!",
+      ),
+      q(
+        "Mata uang negara Singapura adalah ...",
+        ["Ringgit", "Baht", "Dolar Singapura", "Peso"],
+        2,
+        "Singapura menggunakan Dolar Singapura!",
+      ),
+      q(
+        "Pemberontakan yang dilakukan PKI di Madiun terjadi pada tahun ...",
+        ["1945", "1946", "1948", "1965"],
+        2,
+        "Pemberontakan PKI Madiun: 1948!",
+      ),
+      q(
+        "Produk lokal Indonesia yang terkenal di dunia adalah ...",
+        ["batik", "jeans", "jas", "topi baret"],
+        0,
+        "Batik adalah produk lokal Indonesia yang terkenal!",
+      ),
+      q(
+        "Negara ASEAN yang berada di Indochina adalah ...",
+        ["Indonesia", "Filipina", "Vietnam", "Malaysia"],
+        2,
+        "Vietnam berada di Indochina!",
+      ),
+    ],
+    pai: [
+      q(
+        "Hukum tajwid 'mad wajib muttasil' terjadi ketika huruf mad bertemu ...",
+        [
+          "huruf mati di lain kata",
+          "huruf hamzah dalam satu kata",
+          "huruf mati dalam satu kata",
+          "huruf hidup",
+        ],
+        1,
+        "Mad wajib muttasil: mad + hamzah satu kata!",
+      ),
+      q(
+        "Akhlak mulia yang utama menurut Islam adalah ...",
+        [
+          "siddiq (jujur), amanah, tabligh, fathanah",
+          "kaya, pintar, terkenal, berkuasa",
+          "cantik, tinggi, muda, sehat",
+          "cerdas, kuat, berani, gagah",
+        ],
+        0,
+        "Akhlak mulia: siddiq, amanah, tabligh, fathanah!",
+      ),
+      q(
+        "Sejarah masuknya Islam ke Nusantara yang paling banyak diterima adalah melalui ...",
+        [
+          "penaklukan militer",
+          "perdagangan dan perkawinan",
+          "paksaan kerajaan",
+          "bencana alam",
+        ],
+        1,
+        "Islam masuk Nusantara via perdagangan & perkawinan!",
+      ),
+      q(
+        "Hukum tajwid 'idgham bilaghunnah' terjadi ketika nun mati bertemu ...",
+        [
+          "huruf idgham bighunnah",
+          "huruf lam dan ra",
+          "huruf ikhfa",
+          "huruf iqlab",
+        ],
+        1,
+        "Bilaghunnah: nun mati + lam/ra!",
+      ),
+      q(
+        "Wali Songo yang berdakwah melalui seni wayang adalah ...",
+        ["Sunan Kalijaga", "Sunan Giri", "Sunan Kudus", "Sunan Bonang"],
+        0,
+        "Sunan Kalijaga dakwah lewat wayang!",
+      ),
+      q(
+        "Sifat mustahil bagi Allah 'Huduts' artinya ...",
+        ["Maha Ada", "Maha Kekal", "baru/ada awal", "Maha Kuasa"],
+        2,
+        "Huduts = baru (mustahil bagi Allah)!",
+      ),
+      q(
+        "Kerajaan Islam pertama di Indonesia adalah ...",
+        [
+          "Kerajaan Majapahit",
+          "Kerajaan Sriwijaya",
+          "Kerajaan Samudera Pasai",
+          "Kerajaan Demak",
+        ],
+        2,
+        "Kerajaan Islam pertama: Samudera Pasai!",
+      ),
+      q(
+        "Hukum membaca Al-Quran dengan tajwid adalah ...",
+        ["sunnah", "mubah", "wajib", "haram"],
+        2,
+        "Membaca Al-Quran dengan tajwid = wajib!",
+      ),
+      q(
+        "Wali Songo yang mendirikan pesantren pertama di Jawa adalah ...",
+        ["Sunan Kalijaga", "Sunan Ampel", "Sunan Muria", "Sunan Gresik"],
+        1,
+        "Sunan Ampel mendirikan pesantren pertama di Jawa!",
+      ),
+      q(
+        "Tawadhu artinya ...",
+        ["sombong", "rendah hati", "pemarah", "dengki"],
+        1,
+        "Tawadhu = rendah hati!",
+      ),
+      q(
+        "Islam masuk ke Nusantara sekitar abad ...",
+        ["5 M", "8 M", "13 M", "16 M"],
+        2,
+        "Islam masuk ke Nusantara sekitar abad ke-13!",
+      ),
+      q(
+        "Hukum tajwid ketika ada dua huruf yang sama dan berdekatan disebut ...",
+        ["idgham mutamatsilain", "ikhfa", "izhar", "iqlab"],
+        0,
+        "Dua huruf sama berdekatan = idgham mutamatsilain!",
+      ),
+      q(
+        "Perilaku husnudzan artinya ...",
+        [
+          "berprasangka buruk",
+          "berprasangka baik",
+          "tidak peduli",
+          "tidak percaya",
+        ],
+        1,
+        "Husnudzan = berprasangka baik!",
+      ),
+      q(
+        "Kerajaan Demak adalah kerajaan Islam di ...",
+        ["Kalimantan", "Sumatra", "Jawa", "Sulawesi"],
+        2,
+        "Kerajaan Demak ada di Jawa!",
+      ),
+      q(
+        "Sifat wajib Allah 'Qudrat' artinya ...",
+        ["Maha Mengetahui", "Maha Berkehendak", "Maha Kuasa", "Maha Hidup"],
+        2,
+        "Qudrat = Maha Kuasa!",
+      ),
+    ],
+    bing: [
+      q(
+        "Which sentence uses correct grammar?",
+        [
+          "She don't like apples",
+          "He don't go to school",
+          "They doesn't play",
+          "She doesn't like apples",
+        ],
+        3,
+        "She doesn't (third person singular)!",
+      ),
+      q(
+        "'Can you read this passage and answer the questions?' This is a ...",
+        [
+          "grammar exercise",
+          "reading comprehension task",
+          "conversation",
+          "dictation",
+        ],
+        1,
+        "Reading and answering = reading comprehension!",
+      ),
+      q(
+        "'Good morning! How are you?' is an example of ...",
+        [
+          "formal letter",
+          "simple conversation",
+          "grammar rule",
+          "reading text",
+        ],
+        2,
+        "Greeting exchange = simple conversation!",
+      ),
+      q(
+        "Which is the correct past tense of 'go'?",
+        ["goed", "goes", "went", "gone"],
+        2,
+        "Past tense of go = went!",
+      ),
+      q(
+        "Reading comprehension means ...",
+        [
+          "menulis teks",
+          "memahami isi bacaan",
+          "berbicara dalam bahasa Inggris",
+          "menerjemahkan kata saja",
+        ],
+        1,
+        "Reading comprehension = memahami isi bacaan!",
+      ),
+      q(
+        "'How do you do?' is a ...",
+        ["formal greeting", "casual greeting", "farewell", "apology"],
+        0,
+        "How do you do = formal greeting!",
+      ),
+      q(
+        "Which sentence is correct?",
+        [
+          "I goed to school yesterday",
+          "She went to the market",
+          "They go to the park yesterday",
+          "He goes home last night",
+        ],
+        1,
+        "She went = correct past tense!",
+      ),
+      q(
+        "'The students ... their homework yesterday.' Correct:",
+        ["do", "does", "did", "doing"],
+        2,
+        "Yesterday = past tense = did!",
+      ),
+      q(
+        "A simple conversation includes ...",
+        [
+          "only reading passages",
+          "greeting, asking and answering questions, farewell",
+          "grammar rules only",
+          "writing long essays",
+        ],
+        1,
+        "Conversation: greeting, Q&A, farewell!",
+      ),
+      q(
+        "Which question is correct grammar?",
+        [
+          "Where she lives?",
+          "Where does she live?",
+          "Where does she lives?",
+          "Where live she?",
+        ],
+        1,
+        "Does she live = correct question form!",
+      ),
+      q(
+        "'Nice to meet you!' is said when ...",
+        [
+          "saying goodbye",
+          "meeting someone for the first time",
+          "asking a question",
+          "giving an answer",
+        ],
+        1,
+        "Nice to meet you = first meeting!",
+      ),
+      q(
+        "'She has ... her homework.' Correct:",
+        ["do", "does", "did", "done"],
+        3,
+        "Has + done = present perfect!",
+      ),
+      q(
+        "Which word correctly completes: 'I ... English for 3 years.'?",
+        ["study", "studied", "have studied", "was studying"],
+        2,
+        "For 3 years = present perfect = have studied!",
+      ),
+      q(
+        "'Goodbye, see you tomorrow!' is a ...",
+        ["greeting", "question", "farewell", "complaint"],
+        2,
+        "Goodbye = farewell!",
+      ),
+      q(
+        "Which sentence is in passive voice?",
+        [
+          "She reads the book",
+          "The book is read by her",
+          "She is reading",
+          "She will read",
+        ],
+        1,
+        "Is read by = passive voice!",
+      ),
+    ],
+  },
+};
+
+// ============================================================
+// STATE VARIABEL – SEKOLAH DASAR
+// ============================================================
+let sdCurrentKelas = null; // objek kelas terpilih
+let sdCurrentMapel = null; // objek mapel terpilih
+let sdQuestions = []; // 15 soal yang diacak
+let sdCurrentQ = 0;
+let sdScore = 0;
+let sdBenar = 0;
+let sdSalah = 0;
+let sdAnswered = false;
+
+// ============================================================
+// NAVIGASI SEKOLAH DASAR
+// ============================================================
+function goToSd() {
+  playClickSound();
+  buildSdKelasGrid();
+  showScreen("sdKelas");
+}
+
+function goToSdKelas() {
+  playClickSound();
+  showScreen("sdKelas");
+}
+
+function goToSdMapel() {
+  playClickSound();
+  buildSdMapelGrid(sdCurrentKelas);
+  showScreen("sdMapel");
+}
+
+// ============================================================
+// BUILD GRID KELAS
+// ============================================================
+function buildSdKelasGrid() {
+  const grid = document.getElementById("sdKelasGrid");
+  grid.innerHTML = "";
+  SD_KELAS_LIST.forEach((k) => {
+    const card = document.createElement("div");
+    card.className = "sd-kelas-card";
+    card.innerHTML = `
+      <span class="sd-kelas-icon">${k.icon}</span>
+      <span class="sd-kelas-label">${k.label}</span>
+      <span class="sd-kelas-sub">6 Mata Pelajaran</span>
+    `;
+    card.onclick = () => {
+      playClickSound();
+      buildSdMapelGrid(k);
+    };
+    grid.appendChild(card);
+  });
+}
+
+// ============================================================
+// BUILD GRID MAPEL
+// ============================================================
+function buildSdMapelGrid(kelas) {
+  sdCurrentKelas = kelas;
+  document.getElementById("sdMapelNavTitle").textContent =
+    kelas.label + " – Pilih Mapel";
+  document.getElementById("sdMapelTitle").textContent =
+    `${kelas.icon} ${kelas.label} – Pilih Mata Pelajaran!`;
+
+  const icon = soundOn ? "🔊" : "🔇";
+  ["soundToggle5", "soundToggle6"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = icon;
+  });
+
+  const grid = document.getElementById("sdMapelGrid");
+  grid.innerHTML = "";
+  SD_MAPEL_LIST.forEach((m) => {
+    const card = document.createElement("div");
+    card.className = `sd-mapel-card ${m.cls}`;
+    card.innerHTML = `
+      <span class="sd-mapel-icon">
+        ${
+          m.id === "bing"
+            ? `<img src="${m.icon}" class="mapel-icon-bing" alt="${m.label}">`
+            : m.icon
+        }
+      </span>
+      <span class="sd-mapel-label">${m.label}</span>
+      <span class="sd-mapel-sub">15 soal pilihan ganda</span>
+    `;
+    card.onclick = () => startSdQuiz(kelas, m);
+    grid.appendChild(card);
+  });
+
+  showScreen("sdMapel");
+}
+
+// ============================================================
+// MULAI KUIS SD
+// ============================================================
+function startSdQuiz(kelas, mapel) {
+  playClickSound();
+  sdCurrentKelas = kelas;
+  sdCurrentMapel = mapel;
+  sdCurrentQ = 0;
+  sdScore = 0;
+  sdBenar = 0;
+  sdSalah = 0;
+
+  // Ambil soal, acak, ambil 15
+  const pool = (SD_DATA[kelas.id] || {})[mapel.id] || [];
+  sdQuestions = shuffle([...pool]).slice(0, 15);
+
+  if (mapel.id === "bing") {
+    document.getElementById("quizSdLabel").innerHTML =
+      `<img src="${mapel.icon}" class="quiz-icon-bing" alt="${mapel.label}"> ${mapel.label}`;
+  } else {
+    document.getElementById("quizSdLabel").innerHTML =
+      `${mapel.icon} ${mapel.label}`;
+  }
+  showScreen("quizSd");
+  renderSdQuestion();
+}
+
+// ============================================================
+// RENDER SOAL SD
+// ============================================================
+function renderSdQuestion() {
+  sdAnswered = false;
+  const q = sdQuestions[sdCurrentQ];
+  const total = sdQuestions.length;
+  const optLetters = ["A", "B", "C", "D"];
+
+  // Progress
+  const pct = (sdCurrentQ / total) * 100;
+  document.getElementById("progressFillSd").style.width = pct + "%";
+  document.getElementById("progressLabelSd").textContent =
+    `${sdCurrentQ + 1} / ${total}`;
+
+  // Kartu soal
+  document.getElementById("questionCardSd").innerHTML = `
+    <div class="sd-q-badge">Soal ${sdCurrentQ + 1}</div>
+    <div class="question-text" style="font-size:1.2rem;margin-bottom:0">${q.q}</div>
+  `;
+
+  // Hint
+  document.getElementById("hintBoxSd").classList.remove("show");
+  document.getElementById("hintTextSd").textContent = q.hint;
+  document.getElementById("nextBtnSd").style.display = "none";
+
+  // Tombol jawaban
+  const grid = document.getElementById("answersGridSd");
+  grid.innerHTML = "";
+  grid.className = "answers-grid cols-sd";
+
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "ans-btn-sd";
+    btn.innerHTML = `<span class="opt-tag">${optLetters[idx]}</span><span>${opt.label}</span>`;
+    btn.onclick = () => handleSdAnswer(idx, btn, q);
+    grid.appendChild(btn);
+  });
+}
+
+// ============================================================
+// HANDLE JAWABAN SD
+// ============================================================
+function handleSdAnswer(idx, btn, q) {
+  if (sdAnswered) return;
+  sdAnswered = true;
+  playClickSound();
+
+  const allBtns = document.querySelectorAll("#answersGridSd .ans-btn-sd");
+  allBtns.forEach((b) => (b.disabled = true));
+
+  if (idx === q.correct) {
+    btn.classList.add("correct");
+    sdBenar++;
+    sdScore = Math.round((sdBenar / sdQuestions.length) * 100);
+    showFeedback(true);
+    playCorrectSound();
+    spawnConfetti();
+  } else {
+    btn.classList.add("wrong");
+    allBtns[q.correct].classList.add("correct");
+    sdSalah++;
+    showFeedback(false);
+    playWrongSound();
+    setTimeout(() => {
+      document.getElementById("modalTitle").textContent = "Hampir Benar! 😊";
+      document.getElementById("modalBody").innerHTML =
+        `Jawaban yang benar: <strong>${q.options[q.correct].label}</strong><br>💡 ${q.hint}`;
+      document.getElementById("modalOverlay").classList.remove("hidden");
+    }, 700);
+  }
+
+  setTimeout(() => {
+    hideFeedback();
+    document.getElementById("nextBtnSd").style.display = "";
+  }, 1200);
+}
+
+function showHintSd() {
+  playClickSound();
+  document.getElementById("hintBoxSd").classList.add("show");
+}
+
+function nextQuestionSd() {
+  playClickSound();
+  sdCurrentQ++;
+  if (sdCurrentQ >= sdQuestions.length) {
+    showResultSd();
+  } else {
+    renderSdQuestion();
+  }
+}
+
+// ============================================================
+// HASIL SD
+// ============================================================
+function showResultSd() {
+  showScreen("resultSd");
+
+  const pct = sdBenar / sdQuestions.length;
+  let title, msg, stars;
+
+  if (pct >= 0.9) {
+    title = "LUAR BIASA! 🏆";
+    msg = "Nilai sempurna! Kamu sangat pintar! Pertahankan prestasimu!";
+    stars = "⭐⭐⭐";
+    playCorrectSound();
+    spawnConfetti(120);
+  } else if (pct >= 0.7) {
+    title = "BAGUS SEKALI! 🌟";
+    msg = "Nilai kamu bagus! Terus semangat belajar ya!";
+    stars = "⭐⭐";
+    playCorrectSound();
+    spawnConfetti(60);
+  } else if (pct >= 0.5) {
+    title = "CUKUP BAIK! 💪";
+    msg = "Tidak buruk! Pelajari lagi materi yang belum dikuasai ya!";
+    stars = "⭐";
+    playTone(440, "sine", 0.5, 0.2);
+  } else {
+    title = "TERUS BELAJAR! 📚";
+    msg = "Jangan menyerah! Ulangi kuis ini dan kamu pasti bisa lebih baik!";
+    playTone(330, "sine", 0.5, 0.15);
+  }
+
+  document.getElementById("resultTitleSd").textContent = title;
+  document.getElementById("resultScoreSd").textContent = sdScore;
+  document.getElementById("resultBenarSd").textContent = sdBenar;
+  document.getElementById("resultSalahSd").textContent = sdSalah;
+  document.getElementById("resultMsgSd").textContent = msg;
+  document.getElementById("resultStarsSd").textContent = stars;
+}
+
+function repeatSd() {
+  playClickSound();
+  startSdQuiz(sdCurrentKelas, sdCurrentMapel);
+}

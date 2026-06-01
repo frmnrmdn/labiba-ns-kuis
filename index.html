@@ -42,7 +42,7 @@
           <div class="class-card-label">Mengaji</div>
           <img src="img/mengaji.png" alt="Mengaji">
         </div>
-        <div class="class-card" onclick="showComingSoon('Sekolah Dasar')">
+        <div class="class-card" onclick="goToSd()">
           <div class="class-card-label">Sekolah Dasar</div>
           <img src="img/sekolahdasar.png" alt="Sekolah Dasar">
         </div>
@@ -134,6 +134,108 @@
           Petunjuk</button>
         <button class="btn btn-green" id="nextBtnMengaji" style="padding:10px 28px;font-size:1rem;display:none;"
           onclick="nextQuestionMengaji()">Selanjutnya →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================
+     SD-1 – PILIH KELAS (Sekolah Dasar)
+     ================================================ -->
+  <div class="screen hidden" id="sdKelas">
+    <div class="navbar">
+      <img src="img/icon-labiba.png" class="icon-navbar" alt="Icon-Labiba">
+      <div class="navbar-title">Sekolah Dasar</div>
+      <button class="sound-btn" onclick="toggleSound()" id="soundToggle5">🔊</button>
+    </div>
+    <div class="sd-body">
+      <div class="section-title" style="margin-bottom:4px;">Pilih Kelas Kamu!</div>
+      <div class="sd-kelas-grid" id="sdKelasGrid"></div>
+      <button class="btn btn-back" style="padding:10px 22px;font-size:1rem;align-self:flex-start;margin-top:auto;"
+        onclick="goToClassCategory()">← Kembali</button>
+    </div>
+  </div>
+
+  <!-- ================================================
+     SD-2 – PILIH MATA PELAJARAN
+     ================================================ -->
+  <div class="screen hidden" id="sdMapel">
+    <div class="navbar">
+      <img src="img/icon-labiba.png" class="icon-navbar" alt="Icon-Labiba">
+      <div class="navbar-title" id="sdMapelNavTitle">Pilih Mata Pelajaran</div>
+      <button class="sound-btn" onclick="toggleSound()" id="soundToggle6">🔊</button>
+    </div>
+    <div class="sd-body">
+      <div class="section-title" id="sdMapelTitle" style="margin-bottom:4px;">Pilih Mata Pelajaran!</div>
+      <div class="sd-mapel-grid" id="sdMapelGrid"></div>
+      <button class="btn btn-back" style="padding:10px 22px;font-size:1rem;align-self:flex-start;margin-top:auto;"
+        onclick="goToSdKelas()">← Kembali</button>
+    </div>
+  </div>
+
+  <!-- ================================================
+     SD-3 – LAYAR KUIS SD
+     ================================================ -->
+  <div class="screen hidden" id="quizSd">
+    <div class="navbar">
+      <button class="btn btn-outline" style="padding:10px 10px;font-size:.9rem;" onclick="goToSdMapel()">←
+        Kembali</button>
+      <div class="navbar-title" id="quizSdLabel" style="margin-left:auto;"></div>
+    </div>
+    <div class="quiz-body">
+      <div class="progress-wrap">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFillSd" style="width:0%"></div>
+        </div>
+        <div class="progress-label" id="progressLabelSd">1 / 15</div>
+      </div>
+      <div class="question-card" id="questionCardSd"></div>
+      <div class="hint-box" id="hintBoxSd">
+        💡 <span id="hintTextSd"></span>
+      </div>
+      <div class="answers-grid cols-sd" id="answersGridSd"></div>
+      <div class="quiz-nav">
+        <button class="btn btn-outline" style="padding:10px 22px;font-size:1rem;" onclick="showHintSd()">💡
+          Petunjuk</button>
+        <button class="btn btn-blue" id="nextBtnSd" style="padding:10px 28px;font-size:1rem;display:none;"
+          onclick="nextQuestionSd()">Selanjutnya →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================
+     SD-4 – HASIL AKHIR SD
+     ================================================ -->
+  <div class="screen hidden" id="resultSd">
+    <div class="result-card-sd-wrap">
+      <img src="/img/icon-labiba.png" class="result-logo" alt="Logo-Labiba">
+      <div class="result-title" id="resultTitleSd">KUIS SELESAI!</div>
+      <div class="stars-row" id="resultStarsSd">⭐⭐⭐</div>
+
+      <div class="sd-result-stats">
+        <div class="sd-stat-box sd-stat-score">
+          <div class="sd-stat-label">SKOR</div>
+          <div class="sd-stat-value" id="resultScoreSd">100</div>
+        </div>
+        <div class="sd-stat-box sd-stat-benar">
+          <div class="sd-stat-label">✅ BENAR</div>
+          <div class="sd-stat-value" id="resultBenarSd">15</div>
+        </div>
+        <div class="sd-stat-box sd-stat-salah">
+          <div class="sd-stat-label">❌ SALAH</div>
+          <div class="sd-stat-value" id="resultSalahSd">0</div>
+        </div>
+      </div>
+
+      <div class="result-msg" id="resultMsgSd">
+        Hebat! Pertahankan prestasimu!
+      </div>
+      <div class="result-buttons">
+        <button class="btn btn-yellow" onclick="repeatSd()">🔄 Ulangi Kuis</button>
+        <button class="btn btn-blue" onclick="goToSdMapel()"
+          style="background:rgba(255,255,255,.25);border:2px solid #fff;">📚 Pilih Mapel Lain</button>
+        <button class="btn btn-blue" onclick="goToClassCategory()"
+          style="background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.5);font-size:1rem;">🏠 Menu
+          Utama</button>
       </div>
     </div>
   </div>
