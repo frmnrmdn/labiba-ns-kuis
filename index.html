@@ -5,7 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Labiba NS - Belajar Bersama!</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/class-category.css">
+  <link rel="stylesheet" href="css/calistung.css">
+  <link rel="stylesheet" href="css/mengaji.css">
+  <link rel="stylesheet" href="css/sd.css">
+  <link rel="stylesheet" href="css/splash.css">
+  <link rel="stylesheet" href="css/result.css">
   <link rel="icon" type="svg" href="/img/icon-labiba.png">
 </head>
 
@@ -230,11 +236,11 @@
         Hebat! Pertahankan prestasimu!
       </div>
       <div class="result-buttons">
-        <button class="btn btn-yellow" onclick="repeatSd()">🔄 Ulangi Kuis</button>
+        <button class="btn btn-yellow" onclick="repeatSd()">Ulangi Kuis</button>
         <button class="btn btn-blue" onclick="goToSdMapel()"
-          style="background:rgba(255,255,255,.25);border:2px solid #fff;">📚 Pilih Mapel Lain</button>
+          style="background:rgba(255,255,255,.25);border:2px solid #fff;">Pilih Mapel Lain</button>
         <button class="btn btn-blue" onclick="goToClassCategory()"
-          style="background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.5);font-size:1rem;">🏠 Menu
+          style="background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.5);font-size:1rem;">Menu
           Utama</button>
       </div>
     </div>
@@ -290,8 +296,18 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Data -->
+  <script src="js/soalCalistung.js"></script>
+  <script src="js/soalMengaji.js"></script>
+  <script src="js/soalSd.js"></script>
 
+  <!-- Global -->
+  <script src="js/app.js"></script>
+
+  <!-- Modul -->
+  <script src="js/calistung.js"></script>
+  <script src="js/mengaji.js"></script>
+  <script src="js/sd.js"></script>
 </body>
 
 </html>

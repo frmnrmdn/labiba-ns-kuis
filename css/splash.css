@@ -1,0 +1,44 @@
+/* Splash screen */
+#splash {
+  height: 100vh;
+  background-image: url("../img/bg-cloud.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash-logo-wrap {
+  padding-bottom: 30px;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.25));
+}
+
+.brand-name {
+  font-family: "Fredoka One", cursive;
+  font-size: 2.4rem;
+  color: var(--yellow);
+  letter-spacing: 2px;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.brand-sub {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 2px;
+  text-align: center;
+}
+
+.splash-tagline {
+  font-family: "Fredoka One", cursive;
+  font-size: 1.8rem;
+  color: #fff;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
+  text-align: center;
+  padding: 0 20px;
+}

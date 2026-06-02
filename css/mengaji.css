@@ -1,0 +1,184 @@
+#quiz,
+#quizMengaji {
+  background: var(--bg);
+  gap: 0;
+  justify-content: flex-end;
+}
+
+.quiz-body {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 18px;
+  overflow-y: auto;
+}
+
+.mengaji-card {
+  border: 3px solid #a5d6a7;
+  background: linear-gradient(135deg, #ffffff 0%, #f1f8e9 100%);
+}
+
+.question-type-badge {
+  display: inline-block;
+  background: var(--blue-light);
+  color: var(--blue-mid);
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+* Badge hijau untuk soal mengaji */ .question-type-badge.badge-mengaji {
+  background: #c8e6c9;
+  color: #1b5e20;
+}
+
+.question-text {
+  font-family: "Fredoka One", cursive;
+  font-size: 1.65rem;
+  color: #1a3a5e;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.question-img {
+  font-size: 5rem;
+  margin: 8px 0;
+  display: block;
+}
+
+/* Teks Arab besar untuk soal hijaiyah */
+.arabic-display {
+  font-size: 5rem;
+  line-height: 1.3;
+  color: #1b5e20;
+  text-align: center;
+  margin: 8px 0;
+  display: block;
+  direction: rtl;
+  text-shadow: 0 2px 8px rgba(27, 94, 32, 0.15);
+}
+
+/* Grid tombol jawaban */
+.answers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+  max-width: 600px;
+}
+.answers-grid.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Jawaban Arab – grid 4 kolom dengan font besar */
+.answers-grid.arabic-grid {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.ans-btn {
+  background: var(--white);
+  border: 3px solid #c0d8f0;
+  border-radius: var(--radius);
+  padding: 18px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: "Fredoka One", cursive;
+  font-size: 1.15rem;
+  color: var(--blue-mid);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    border-color 0.15s;
+  box-shadow: 0 4px 0 #c0d8f0;
+  min-height: 90px;
+  position: relative;
+  overflow: hidden;
+}
+.ans-btn .ans-icon {
+  font-size: 2.4rem;
+}
+
+/* Tombol jawaban Arab – font lebih besar */
+.ans-btn.arabic-btn {
+  font-size: 2.6rem;
+  font-family: "Noto Naskh Arabic", "Traditional Arabic", serif;
+  direction: rtl;
+  color: #1b5e20;
+  border-color: #a5d6a7;
+  box-shadow: 0 4px 0 #a5d6a7;
+  min-height: 100px;
+  line-height: 1.2;
+}
+
+.ans-btn:hover:not(:disabled) {
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 0 #9cc0e0,
+    0 12px 24px rgba(58, 154, 255, 0.2);
+  border-color: var(--blue-dark);
+}
+
+.ans-btn.arabic-btn:hover:not(:disabled) {
+  box-shadow:
+    0 8px 0 #81c784,
+    0 12px 24px rgba(76, 175, 80, 0.2);
+  border-color: var(--green);
+}
+
+.ans-btn.correct {
+  background: #e8f5e9;
+  border-color: var(--green);
+  box-shadow: 0 4px 0 #388e3c;
+  color: #2e7d32;
+  animation: correctPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ans-btn.wrong {
+  background: #ffebee;
+  border-color: var(--red);
+  box-shadow: 0 4px 0 #c62828;
+  color: #c62828;
+  animation: shake 0.4s ease;
+}
+
+@keyframes correctPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-8px);
+  }
+  40%,
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+.ans-btn:disabled {
+  cursor: default;
+}
