@@ -4,6 +4,7 @@ let currentCategory = null;
 let currentQ = 0;
 let score = 0;
 let answered = false;
+let shuffledQuestions = []; // array soal yang sudah diacak
 
 // Web Audio API – tanpa file eksternal
 const AudioCtx = window.AudioContext || window.webkitAudioContext;

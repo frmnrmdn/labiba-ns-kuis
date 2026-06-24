@@ -33,7 +33,8 @@
   letter-spacing: 1px;
 }
 
-* Badge hijau untuk soal mengaji */ .question-type-badge.badge-mengaji {
+/* Badge hijau untuk soal mengaji */
+.question-type-badge.badge-mengaji {
   background: #c8e6c9;
   color: #1b5e20;
 }
