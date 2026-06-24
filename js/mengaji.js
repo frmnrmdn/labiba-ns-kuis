@@ -63,7 +63,6 @@ function renderMengajiQuestion() {
   card.innerHTML = `
     <div class="question-type-badge badge-mengaji">${q.type}</div>
     <div class="question-text">${q.q}</div>
-    <span class="arabic-display">${q.arabic}</span>
     ${audioBtn}
   `;
 

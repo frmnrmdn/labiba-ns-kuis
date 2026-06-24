@@ -10,7 +10,7 @@ const MENGAJI_CATEGORIES = [
       // === KELOMPOK 1: Hijaiyah Dasar (3 soal) – mengenal bentuk huruf ===
       {
         q: "Mana huruf Alif?",
-        arabic: "ا",
+        // arabic: "ا",
         type: "Hijaiyah Dasar",
         subtype: "bentuk",
         options: [

@@ -1,9 +1,20 @@
+// Fungsi mengacak array soal (Fisher-Yates Shuffle)
+function shuffleArray(array) {
+  const shuffled = [...array]; // salin array asli, tidak mengubah data asli
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 // Mulai kuis Calistung
 function startQuiz(cat) {
   playClickSound();
   currentCategory = cat;
   currentQ = 0;
   score = 0;
+  shuffledQuestions = shuffleArray(cat.questions); // acak soal saat kuis dimulai
   document.getElementById("scoreBadge").textContent = "⭐ 0";
   document.getElementById("quizCategoryLabel").textContent =
     cat.icon + " " + cat.label;
@@ -13,8 +24,8 @@ function startQuiz(cat) {
 
 function renderQuestion() {
   answered = false;
-  const q = currentCategory.questions[currentQ];
-  const total = currentCategory.questions.length;
+  const q = shuffledQuestions[currentQ]; // gunakan soal yang sudah diacak
+  const total = shuffledQuestions.length;
 
   const pct = (currentQ / total) * 100;
   document.getElementById("progressFill").style.width = pct + "%";
@@ -137,7 +148,8 @@ function showHint() {
 function nextQuestion() {
   playClickSound();
   currentQ++;
-  if (currentQ >= currentCategory.questions.length) {
+  if (currentQ >= shuffledQuestions.length) {
+    // cek berdasarkan soal yang diacak
     showResult();
   } else {
     renderQuestion();
@@ -147,7 +159,7 @@ function nextQuestion() {
 // Halaman hasil Calistung
 function showResult() {
   showScreen("result");
-  const total = currentCategory.questions.length * 20;
+  const total = shuffledQuestions.length * 20; // hitung total berdasarkan soal yang diacak
   const pct = score / total;
   let title, msg, stars;
 
